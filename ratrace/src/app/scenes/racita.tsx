@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import SpeechBubble from '../components/speechBubble';
-import Remi from '../components/remi';
+import Ratcita from '../components/racitia';
 import Office from '../images/office.png';
 import Image from 'next/image';
 
@@ -135,7 +135,7 @@ const Racita = ({ onDialogueData }: RemiIntroProps) => {
             
             <div className="w-[100vw] h-[100vw]">
                 <div className="absolute z-1 top-[-150] left-[50%] translate-x-[-50%] scale-[0.5]">
-                    <Remi />
+                    <Ratcita />
                 </div>
                 <Image src={Office} alt="Office Background" className="absolute -z-1 bottom-40 right-64 scale-[1.5]"/>
             </div>

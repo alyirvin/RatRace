@@ -19,7 +19,7 @@ interface RemiIntroProps {
 }
 
 const KingExplainTutorial = ({ onDialogueData }: RemiIntroProps) => {
-    const [currentDialogue, setCurrentDialogue] = useState("I have a task for you newbie, a job so easy even someone as unexperienced as you can handle it. Go find Ratcita, you're going to shadow her.");
+    const [currentDialogue, setCurrentDialogue] = useState("I have a task for you newbie, a job so easy even someone as unexperienced as you couldn't mess it up. Go find Ratcita, you're going to shadow her.");
     const [showOptions, setShowOptions] = useState(true);
     const [dialogueStage, setDialogueStage] = useState("initial");
     
