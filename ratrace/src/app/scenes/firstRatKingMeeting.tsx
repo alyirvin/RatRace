@@ -20,9 +20,6 @@ const FirstRatKingMeeting = ({ onDialogueData }: RemiIntroProps) => {
     const [currentDialogue, setCurrentDialogue] = useState("What are you doing in MY office intern? Don't you know I'm busy!");
     const [showOptions, setShowOptions] = useState(true);
     const [dialogueStage, setDialogueStage] = useState("initial");
-    const [karma, setKarma] = useState(0);
-    const [social, setSocial] = useState(0);
-    const [sales, setSales] = useState(0);
     
     const allDialogueOptions: Record<string, DialogueOption[]> = {
         initial: [
@@ -54,35 +51,34 @@ const FirstRatKingMeeting = ({ onDialogueData }: RemiIntroProps) => {
     const handleOptionClick = (option: DialogueOption) => {
         setCurrentDialogue(option.response);
         setShowOptions(false);
-  
-        if (onDialogueData) {
-            if (option.id === 'helpful')
-            {
-                setSocial(social + 1);
-                setSales(sales + 1);
-            }
-            if (option.id == 'nervous')
-            {
-                setSocial(social - 1);
-            }
-            if (option.id === `ew`) 
-            {
-                setSales(sales - 2);
-                setSocial(social -1);
-            }
-        }
         
         setTimeout(() => {
             if (option.nextStage) {
                 setDialogueStage(option.nextStage);
                 if (option.nextStage === "end") {
                     if (onDialogueData) {
+                        let karmaPoints = 0;
+                        let socialPoints = 0;
+                        let salesPoints = 0;
+                        
+                        if (option.id === 'helpful') {
+                            socialPoints = 1;
+                            salesPoints = 1;
+                        }
+                        if (option.id === 'nervous') {
+                            socialPoints = -1;
+                        }
+                        if (option.id === 'ew') {
+                            salesPoints = -2;
+                            socialPoints = -1;
+                        }
+                        
                         onDialogueData({
                             type: 'completed',
-                            finalStage: option.nextStage,
-                            karma: karma,
-                            social: social,
-                            sales: sales
+                            stage: 'FirstRatKingMeeting',
+                            karma: karmaPoints,
+                            social: socialPoints,
+                            sales: salesPoints
                         });
                     }
                 } else {
