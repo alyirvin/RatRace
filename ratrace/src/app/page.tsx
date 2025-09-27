@@ -27,7 +27,7 @@ export default function Home() {
       }));
 
       console.log('Updated player data:', playerData.karma, playerData.social, playerData.sales);
-      // Switch to next scene based on current scene and data
+
       handleSceneTransition(data);
     }
   };
@@ -77,14 +77,12 @@ export default function Home() {
         <div>Sales: {playerData.sales}</div>
       </div>
       
-      {/* Dynamic Scene Rendering */}
       {renderCurrentScene()}
       
-      {/* Static elements that appear in all scenes */}
-      <div id="leftPaw" className="absolute translate-y-2/5 translate-x-90 rotate-12">
+      <div id="leftPaw" className="absolute translate-y-3/5 translate-x-90 rotate-12">
         <Paw />
       </div>
-      <div id="rightPaw" className="absolute translate-y-2/5 translate-x-250 rotate-348">
+      <div id="rightPaw" className="absolute translate-y-3/5 translate-x-250 rotate-348">
         <Paw />
       </div>
     </div>

@@ -115,8 +115,8 @@ const WalkToDesk = ({ onDialogueData }: RemiIntroProps) => {
                 </div>
             )}
 
-            <div className="z-0 w-[100vw] h-[100vh] flex justify-center items-center absolute bottom-0 right-0 ">
-                <Image src={ComputerView} alt="Computer View" className="w-full h-full object-cover" />
+            <div className="z-0 w-[100vw] h-[100vh] flex justify-center items-center absolute bottom-30 right-0 ">
+                <Image src={ComputerView} alt="Computer View" className="" />
             </div>
         </div>
     );
