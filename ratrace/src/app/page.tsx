@@ -6,15 +6,16 @@ import RemiIntro from './scenes/remiIntro';
 import WalkToDesk from './scenes/walkToDesk';
 import FetchCoffee from './scenes/fetchCoffee';
 import FirstRatKingMeeting from './scenes/firstRatKingMeeting';
+import DeclarationsQuiz from './scenes/declarationsQuiz';
 import Ratcita from './scenes/ratcita';
 import KingExplainTutorial from './scenes/kingExplainTutorial';
-import ShadowRacita from './scenes/shadowRatcita';
+import ShadowRatcita from './scenes/shadowRatcita';
 import TalkAfterShadowing from './scenes/talkAfterShadowing';
 import RakeFromSnoutFarm from './scenes/rakeFromSnoutFarm';
 
 export default function Home() {
   const [day, setDay] = useState(1);
-  const [currentScene, setCurrentScene] = useState('remiIntro');
+  const [currentScene, setCurrentScene] = useState('declarationsQuiz');
   const [playerData, setPlayerData] = useState({
     karma: 0,
     social: 0,
@@ -39,6 +40,9 @@ export default function Home() {
 
   const handleSceneTransition = (data: any) => {
     switch (currentScene) {
+      // case 'declarationsQuiz':
+      //   setCurrentScene('remiIntro');
+      //   break;
       case 'remiIntro':
         setCurrentScene('talkAfterShadowing');
         break;
@@ -85,7 +89,7 @@ export default function Home() {
       case 'ratcita':
         return <Ratcita onDialogueData={handleDialogueData} />
       case 'shadowRacita':
-        return <ShadowRacita onDialogueData={handleDialogueData} />
+        return <ShadowRatcita onDialogueData={handleDialogueData} />
       case 'talkAfterShadowing':
         return <TalkAfterShadowing onDialogueData={handleDialogueData} />
       case 'rakeFromSnoutFarm':
@@ -102,10 +106,10 @@ export default function Home() {
       {renderCurrentScene()}
       
       <div id="leftPaw" className="absolute translate-y-3/5 translate-x-90 rotate-12">
-        <Paw />
+        {/* <Paw /> */}
       </div>
       <div id="rightPaw" className="absolute translate-y-3/5 translate-x-250 rotate-348">
-        <Paw />
+        {/* <Paw /> */}
       </div>
     </div>
   );

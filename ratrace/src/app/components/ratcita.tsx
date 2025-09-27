@@ -1,5 +1,5 @@
 import React from 'react';
-import RatcitaImage from "../images/Ratcita clear.png";
+import RatcitaImage from "../images/Ratcita.png";
 import Image from 'next/image';
 
 const Ratcita = () => {
