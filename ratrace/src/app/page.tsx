@@ -44,7 +44,7 @@ export default function Home() {
       //   setCurrentScene('remiIntro');
       //   break;
       case 'remiIntro':
-        setCurrentScene('talkAfterShadowing');
+        setCurrentScene('walkToDesk');
         break;
       case 'walkToDesk':
         setCurrentScene('fetchCoffee');
