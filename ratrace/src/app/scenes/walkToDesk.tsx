@@ -60,7 +60,6 @@ const WalkToDesk = ({ onDialogueData }: RemiIntroProps) => {
                 setDialogueStage(option.nextStage);
                 if (option.nextStage === "end") {
                     if (onDialogueData) {
-                        // Calculate points based on player choice
                         let karmaPoints = 0;
                         let socialPoints = 0;
                         let salesPoints = 0;
@@ -80,7 +79,7 @@ const WalkToDesk = ({ onDialogueData }: RemiIntroProps) => {
                         
                         onDialogueData({
                             type: 'completed',
-                            finalStage: option.nextStage,
+                            stage: 'WalkToDesk',
                             karma: karmaPoints,
                             social: socialPoints,
                             sales: salesPoints
@@ -115,7 +114,7 @@ const WalkToDesk = ({ onDialogueData }: RemiIntroProps) => {
                 </div>
             )}
 
-            <div className="z-0 w-[100vw] h-[100vh] flex justify-center items-center absolute bottom-30 right-0 ">
+            <div className="z-0 w-[100vw] h-[100vh] flex justify-center items-center absolute bottom-28 right-0 ">
                 <Image src={ComputerView} alt="Computer View" className="" />
             </div>
         </div>
