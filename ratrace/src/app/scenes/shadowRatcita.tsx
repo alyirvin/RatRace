@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import SpeechBubble from '../components/speechBubble';
 import Ratcita from '../components/racitia';
 import Office from '../images/office.png';
-import Desk from '../images/Legs for days.jpg'
+import Desk from '../images/Personal desk on seats.png'
 import Image from 'next/image';
 
 interface DialogueOption {
@@ -127,7 +127,7 @@ const ShadowRacita = ({ onDialogueData }: RemiIntroProps) => {
             )}
             
             <div className="w-[100vw] h-[100vw]">
-                <Image src={Desk} alt="Office Background" className="absolute -z-1 scale-[1.1]"/>
+                <Image src={Desk} alt="Office Background" className="absolute -z-1 scale-[1]"/>
             </div>
         </div>
     );

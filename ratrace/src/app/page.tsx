@@ -38,7 +38,7 @@ export default function Home() {
   const handleSceneTransition = (data: any) => {
     switch (currentScene) {
       case 'remiIntro':
-        setCurrentScene('racita');
+        setCurrentScene('walkToDesk');
         break;
       case 'walkToDesk':
         setCurrentScene('fetchCoffee');
