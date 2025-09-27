@@ -6,6 +6,7 @@ import SpeechBubble from "./components/speechBubble";
 import Remi from "./components/remi";
 import RemiIntro from './scenes/remiIntro';
 import WalkToDesk from './scenes/walkToDesk';
+import FirstRatKingMeeting from './scenes/firstRatKingMeeting';
 
 export default function Home() {
   const [day, setDay] = useState(1);
@@ -40,13 +41,13 @@ export default function Home() {
         break;
       case 'walkToDesk':
         // After task assignment, go to work day
-        setCurrentScene('');
+        setCurrentScene('firstRatKingMeeting');
         break;
-      // case 'workDay':
-      //   // After work day, advance to next day
-      //   setDay(prev => prev + 1);
-      //   setCurrentScene('dayTransition');
-      //   break;
+      case 'firstRatKingMeeting':
+        // After work day, advance to next day
+        // setDay(prev => prev + 1);
+        setCurrentScene('remiIntro');
+        break;
       // case 'dayTransition':
       //   // Reset for new day
       //   setCurrentScene('remiIntro');
@@ -62,6 +63,8 @@ export default function Home() {
         return <RemiIntro onDialogueData={handleDialogueData} />;
       case 'walkToDesk':
         return <WalkToDesk onDialogueData={handleDialogueData} />;
+      case 'firstRatKingMeeting':
+        return <FirstRatKingMeeting onDialogueData={handleDialogueData} />
       default:
         return <div className="text-white text-center">Unknown scene: {currentScene}</div>;
     }
