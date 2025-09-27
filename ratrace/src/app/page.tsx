@@ -6,9 +6,10 @@ import RemiIntro from './scenes/remiIntro';
 import WalkToDesk from './scenes/walkToDesk';
 import FetchCoffee from './scenes/fetchCoffee';
 import FirstRatKingMeeting from './scenes/firstRatKingMeeting';
-import Racita from './scenes/racita';
+import Ratcita from './scenes/ratcita';
 import KingExplainTutorial from './scenes/kingExplainTutorial';
 import ShadowRacita from './scenes/shadowRatcita';
+import TalkAfterShadowing from './scenes/talkAfterShadowing';
 
 export default function Home() {
   const [day, setDay] = useState(1);
@@ -38,7 +39,7 @@ export default function Home() {
   const handleSceneTransition = (data: any) => {
     switch (currentScene) {
       case 'remiIntro':
-        setCurrentScene('walkToDesk');
+        setCurrentScene('ratcita');
         break;
       case 'walkToDesk':
         setCurrentScene('fetchCoffee');
@@ -50,12 +51,15 @@ export default function Home() {
         setCurrentScene('kingExplainTutorial');
         break;
       case 'kingExplainTutorial':
-        setCurrentScene('racita');
+        setCurrentScene('ratcita');
         break;
-      case 'racita':
+      case 'ratcita':
         setCurrentScene('shadowRacita'); 
         break;
       case 'shadowRacita':
+        setCurrentScene('talkAfterShadowing');
+        break;
+      case 'talkAfterShadowing':
         setCurrentScene('remiIntro');
       default:
         console.log('Unknown scene transition from:', currentScene);
@@ -74,10 +78,12 @@ export default function Home() {
         return <FirstRatKingMeeting onDialogueData={handleDialogueData} />
       case 'kingExplainTutorial':
         return <KingExplainTutorial onDialogueData={handleDialogueData}/>
-      case 'racita':
-        return <Racita onDialogueData={handleDialogueData} />
+      case 'ratcita':
+        return <Ratcita onDialogueData={handleDialogueData} />
       case 'shadowRacita':
         return <ShadowRacita onDialogueData={handleDialogueData} />
+      case 'talkAfterShadowing':
+        return <TalkAfterShadowing onDialogueData={handleDialogueData} />
       default:
         return <div className="text-white text-center">Unknown scene: {currentScene}</div>;
     }
