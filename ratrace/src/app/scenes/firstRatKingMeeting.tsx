@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import NarrationBubble from '../components/narrationBubble';
 import SpeechBubble from '../components/speechBubble';
 import RatKing from '../components/ratKing';
 
@@ -113,7 +114,7 @@ const FirstRatKingMeeting = ({ onDialogueData }: RemiIntroProps) => {
                 </div>
             )}
             
-            <div className="z-1 w-[100vw] h-[100vw] flex justify-center items-center absolute bottom-[-25vh] right-[-15vw] scale-[0.75]">
+            <div className="z-1 w-[100vw] h-[100vw] flex justify-center items-center absolute bottom-[-25vh] right-[-15vw] scale-[0.50]">
                 <RatKing />
             </div>
         </div>
