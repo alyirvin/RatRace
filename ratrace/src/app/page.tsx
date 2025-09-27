@@ -6,6 +6,7 @@ import RemiIntro from './scenes/remiIntro';
 import WalkToDesk from './scenes/walkToDesk';
 import FetchCoffee from './scenes/fetchCoffee';
 import FirstRatKingMeeting from './scenes/firstRatKingMeeting';
+import KingExplainTutorial from './scenes/kingExplainTutorial';
 
 export default function Home() {
   const [day, setDay] = useState(1);
@@ -44,6 +45,9 @@ export default function Home() {
         setCurrentScene('firstRatKingMeeting');
         break;
       case 'firstRatKingMeeting':
+        setCurrentScene('kingExplainTutorial');
+        break;
+      case 'kingExplainTutorial':
         setCurrentScene('remiIntro');
         break;
       default:
@@ -60,7 +64,9 @@ export default function Home() {
       case 'fetchCoffee':
         return <FetchCoffee onDialogueData={handleDialogueData} />;
       case 'firstRatKingMeeting':
-        return <FirstRatKingMeeting onDialogueData={handleDialogueData} />
+        return <FirstRatKingMeeting onDialogueData={handleDialogueData} />;
+      case 'kingExplainTutorial':
+        return <KingExplainTutorial onDialogueData={handleDialogueData}/>
       default:
         return <div className="text-white text-center">Unknown scene: {currentScene}</div>;
     }

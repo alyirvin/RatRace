@@ -18,8 +18,8 @@ interface RemiIntroProps {
     onDialogueData?: (data: any) => void;
 }
 
-const FirstRatKingMeeting = ({ onDialogueData }: RemiIntroProps) => {
-    const [currentDialogue, setCurrentDialogue] = useState("What are you doing in MY office intern? Don't you know I'm busy!");
+const KingExplainTutorial = ({ onDialogueData }: RemiIntroProps) => {
+    const [currentDialogue, setCurrentDialogue] = useState("I have a task for you newbie, a job so easy even someone as unexperienced as you can handle it. Go find Ratcita, you're going to shadow her.");
     const [showOptions, setShowOptions] = useState(true);
     const [dialogueStage, setDialogueStage] = useState("initial");
     
@@ -27,20 +27,20 @@ const FirstRatKingMeeting = ({ onDialogueData }: RemiIntroProps) => {
         initial: [
             {
                 id: "helpful",
-                text: "Good morning, sir! Brought your coffee just the way you like it.",
-                response: "Hmm. Polite. Efficient. Acceptable.",
+                text: "I've got it boss!",
+                response: "Hmm, we'll see about that.",
                 nextStage: "end"
             },
             {
                 id: "nervous", 
-                text: "Here’s your coffee. I had more important things to do, but whatever.",
-                response: "Well. Remind me never to rely on you for anything mission-critical.",
+                text: "Sounds like a big task, am I ready for that?",
+                response: "With that mindset you'll never get far in this industry.",
                 nextStage: "end"
             },
             {
                 id: "ew",
-                text: "*Throw the coffee at king rat*",
-                response: "RAAAAAAAAHHHHHHHHHHHHH",
+                text: "Don't insult my skills.",
+                response: "Get out of my office! And be glad I'm not firing you on the spot.",
                 nextStage: "end"
             },
         ]
@@ -77,7 +77,7 @@ const FirstRatKingMeeting = ({ onDialogueData }: RemiIntroProps) => {
                         
                         onDialogueData({
                             type: 'completed',
-                            stage: 'FirstRatKingMeeting',
+                            stage: 'KingExplainTutorial',
                             karma: karmaPoints,
                             social: socialPoints,
                             sales: salesPoints
@@ -120,4 +120,4 @@ const FirstRatKingMeeting = ({ onDialogueData }: RemiIntroProps) => {
     );
 };
 
-export default FirstRatKingMeeting;
+export default KingExplainTutorial;
