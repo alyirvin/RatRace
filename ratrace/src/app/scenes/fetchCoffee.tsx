@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import SpeechBubble from '../components/speechBubble';
 import Remi from '../components/remi';
+import ComputerView from '../images/computerView.png';
+import Image from 'next/image';
 
 interface DialogueOption {
     id: string;
@@ -15,8 +17,9 @@ interface RemiIntroProps {
     onDialogueData?: (data: any) => void;
 }
 
-const RemiIntro = ({ onDialogueData }: RemiIntroProps) => {
-    const [currentDialogue, setCurrentDialogue] = useState("Hey there! Welcome to Snout Farm, I'm Remi! I'm here to help you around on your first day. Are you ready?");
+const FetchCoffee = ({ onDialogueData }: RemiIntroProps) => {
+    const [currentDialogue, setCurrentDialogue] = useState(`Now that I've shown you your desk, it's now time for your first task! ` +
+        `Go grab a coffee from the break room and bring it to King Rat. He's in his office right now, and be careful, he's very... critical`);
     const [showOptions, setShowOptions] = useState(true);
     const [dialogueStage, setDialogueStage] = useState("initial");
     
@@ -24,20 +27,20 @@ const RemiIntro = ({ onDialogueData }: RemiIntroProps) => {
         initial: [
             {
                 id: "helpful",
-                text: "Definitely! Let's do it!",
-                response: "Great! I love the attitude! Here, follow me.",
+                text: "Thanks Remi! I think I'll be able to win over the boss in no time!",
+                response: "I'm sure you will! I'll be rooting for you!",
                 nextStage: "end"
             },
             {
                 id: "nervous", 
-                text: "I guess, I'm a little nervous.",
-                response: "That's ok, you'll get the hang of it soon enough.",
+                text: "Is there anything more productive to do?",
+                response: "Well there's lots of benefits for getting your boss's coffee. I don't know if fulfilment is one but let's ont worry about that right now.",
                 nextStage: "end"
             },
             {
                 id: "ew",
-                text: "Ugh not really.",
-                response: "Oh ok... Well I still need to show you around, so follow me.",
+                text: "I don't believe in higher ups.",
+                response: "That's interesting... he is still your boss though so maybe just go bring him the coffee anyway...",
                 nextStage: "end"
             },
         ]
@@ -56,20 +59,22 @@ const RemiIntro = ({ onDialogueData }: RemiIntroProps) => {
                 setDialogueStage(option.nextStage);
                 if (option.nextStage === "end") {
                     if (onDialogueData) {
+                        // Calculate points based on player choice
                         let karmaPoints = 0;
                         let socialPoints = 0;
                         let salesPoints = 0;
                         
                         if (option.id === 'helpful') {
                             socialPoints = 1;
-                            karmaPoints = 1;
-                        }
-                        if (option.id === 'ew') {
-                            salesPoints = -1;
-                            karmaPoints = -1;
+                            salesPoints = 1;
                         }
                         if (option.id === 'nervous') {
-                            socialPoints = 0; // neutral choice
+                            salesPoints = 1;
+                            socialPoints = -1;
+                        }
+                        if (option.id === 'ew') {
+                            socialPoints = -1;
+                            salesPoints = -1;
                         }
                         
                         onDialogueData({
@@ -91,12 +96,12 @@ const RemiIntro = ({ onDialogueData }: RemiIntroProps) => {
 
     return (
         <div className="w-full h-full relative">
-            <div className="absolute top-[25%] left-[7%]">
-                <SpeechBubble orientation="right" message={currentDialogue}/>
+            <div className="z-2 absolute top-[25%] left-[3%]">
+                <SpeechBubble orientation="left" message={currentDialogue}/>
             </div>
             
             {showOptions && (
-                <div className="absolute bottom-[10%] left-1/2 transform -translate-x-1/2 w-[60%] max-w-[500px] flex flex-col gap-3 z-10">
+                <div className="z-2 absolute bottom-[10%] left-1/2 transform -translate-x-1/2 w-[60%] max-w-[500px] flex flex-col gap-3 z-10">
                     {getCurrentOptions().map((option: DialogueOption) => (
                         <button
                             key={option.id}
@@ -108,12 +113,12 @@ const RemiIntro = ({ onDialogueData }: RemiIntroProps) => {
                     ))}
                 </div>
             )}
-            
-            <div className="z-1 w-[100vw] h-[100vw] flex justify-center items-center absolute bottom-[-25vh] right-[-15vw] scale-[0.75]">
-                <Remi />
+
+            <div className="z-0 w-[100vw] h-[100vh] flex justify-center items-center absolute bottom-30 right-0 ">
+                <Image src={ComputerView} alt="Computer View" className="" />
             </div>
         </div>
     );
 };
 
-export default RemiIntro;
+export default FetchCoffee;
