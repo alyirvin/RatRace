@@ -8,6 +8,7 @@ import FetchCoffee from './scenes/fetchCoffee';
 import FirstRatKingMeeting from './scenes/firstRatKingMeeting';
 import Racita from './scenes/racita';
 import KingExplainTutorial from './scenes/kingExplainTutorial';
+import ShadowRacita from './scenes/shadowRatcita';
 
 export default function Home() {
   const [day, setDay] = useState(1);
@@ -37,7 +38,7 @@ export default function Home() {
   const handleSceneTransition = (data: any) => {
     switch (currentScene) {
       case 'remiIntro':
-        setCurrentScene('walkToDesk');
+        setCurrentScene('racita');
         break;
       case 'walkToDesk':
         setCurrentScene('fetchCoffee');
@@ -52,7 +53,10 @@ export default function Home() {
         setCurrentScene('racita');
         break;
       case 'racita':
-        setCurrentScene('remiIntro'); 
+        setCurrentScene('shadowRacita'); 
+        break;
+      case 'shadowRacita':
+        setCurrentScene('remiIntro');
       default:
         console.log('Unknown scene transition from:', currentScene);
     }
@@ -72,6 +76,8 @@ export default function Home() {
         return <KingExplainTutorial onDialogueData={handleDialogueData}/>
       case 'racita':
         return <Racita onDialogueData={handleDialogueData} />
+      case 'shadowRacita':
+        return <ShadowRacita onDialogueData={handleDialogueData} />
       default:
         return <div className="text-white text-center">Unknown scene: {currentScene}</div>;
     }

@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import SpeechBubble from '../components/speechBubble';
 import Ratcita from '../components/racitia';
 import Office from '../images/office.png';
+import Desk from '../images/Legs for days.jpg'
 import Image from 'next/image';
 
 interface DialogueOption {
@@ -17,8 +18,8 @@ interface RemiIntroProps {
     onDialogueData?: (data: any) => void;
 }
 
-const Racita = ({ onDialogueData }: RemiIntroProps) => {
-    const [currentDialogue, setCurrentDialogue] = useState("Hi there! You must be our new intern. I'm Racita, one of the insurance agents here. How's your first day going so far?");
+const ShadowRacita = ({ onDialogueData }: RemiIntroProps) => {
+    const [currentDialogue, setCurrentDialogue] = useState("Perfect you're here! You're going to listen while I take this call. Just take some notes on how I handle the situation");
     const [showOptions, setShowOptions] = useState(true);
     const [dialogueStage, setDialogueStage] = useState("initial");
     
@@ -26,34 +27,28 @@ const Racita = ({ onDialogueData }: RemiIntroProps) => {
         initial: [
             {
                 id: "excited",
-                text: "Great! I'm eager to learn and contribute!",
-                response: "That's great to hear! Why don't you come by my desk in a bit and shadow me on some work?",
-                nextStage: "afterOffer"
+                text: "*Take detailed notes and ask questions about insurance afterward.*",
+                response: "That’s the kind of curiosity that gets you promoted! Insurance is a financial arrangement that provides protection against loss or risk. In exchange for a premium, the insurer promises to compensate the insured for covered losses.",
+                nextStage: "end"
             },
             {
                 id: "nervous", 
-                text: "Alright, I guess. There's a lot to take in.",
-                response: "Ah I remember my first day too. Why don't you come by my desk in a bit and shadow me on some work?",
-                nextStage: "afterOffer"
+                text: "*Half listen while scrolling on your phone*",
+                response: "Did you catch how I handled that deductible question?",
+                nextStage: "deductibleQuestion"
             },
             {
                 id: "ew",
-                text: "None of your business.",
-                response: "Oh! Well okay then...",
+                text: "*Interrupt the call to correct Racita on what a deductible is.*",
+                response: "I totally knew that a deductible is the amount you must pay out-of-pocket before your insurance starts covering the costs. Don’t embarrass me like that!.",
                 nextStage: "end"
             },
         ],
-        afterOffer: [
+        deductibleQuestion: [
             {
-                id: "accept",
-                text: "Sure! I'd love to learn from you.",
-                response: "Awesome! I'll see you at my desk in a bit.",
-                nextStage: "end"
-            },
-            {
-                id: "decline",
-                text: "Maybe later, I want to explore a bit more first.",
-                response: "No worries! Just let me know when you're ready.",
+                id: "dontKnow",
+                text: "…What’s a deductible again?",
+                response: "*sigh*, a deductible is the amount you must pay out-of-pocket before your insurance starts covering the costs.",
                 nextStage: "end"
             }
         ]
@@ -78,20 +73,18 @@ const Racita = ({ onDialogueData }: RemiIntroProps) => {
                         
                         if (option.id === 'excited') {
                             socialPoints = 1;
-                        }
-                        if (option.id === 'ew') {
-                            salesPoints = -1;
-                            socialPoints = -1;
-                            karmaPoints = -1;
-                        }
-                        if (option.id === 'nervous') {
-                            socialPoints = 0; 
-                        }
-                        if (option.id === 'accept') {
-                            socialPoints = 1;
                             salesPoints = 1;
                         }
-                        if (option.id === 'decline') {
+                        if (option.id === 'ew') {
+                            salesPoints = 1;
+                            socialPoints = -1;
+                        }
+                        if (option.id === 'nervous') {
+                            socialPoints = -1;
+                            salesPoints = -1;
+                        }
+                        if (option.id === 'dontKnow') {
+                            socialPoints = -1;
                             salesPoints = -1;
                         }
 
@@ -115,8 +108,8 @@ const Racita = ({ onDialogueData }: RemiIntroProps) => {
 
     return (
         <div className="w-full h-full relative">
-            <div className="absolute top-[25%] right-[62%]">
-                <SpeechBubble orientation="right" message={currentDialogue}/>
+            <div className="absolute top-[25%] right-[68%]">
+                <SpeechBubble orientation="left" message={currentDialogue}/>
             </div>
             
             {showOptions && (
@@ -134,13 +127,10 @@ const Racita = ({ onDialogueData }: RemiIntroProps) => {
             )}
             
             <div className="w-[100vw] h-[100vw]">
-                <div className="absolute z-1 top-[-175] left-[50%] translate-x-[-50%] scale-[0.5]">
-                    <Ratcita />
-                </div>
-                <Image src={Office} alt="Office Background" className="absolute -z-1 bottom-40 right-64 scale-[1.5]"/>
+                <Image src={Desk} alt="Office Background" className="absolute -z-1 scale-[1.1]"/>
             </div>
         </div>
     );
 };
 
-export default Racita;
+export default ShadowRacita;
