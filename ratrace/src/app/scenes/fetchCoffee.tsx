@@ -59,7 +59,6 @@ const FetchCoffee = ({ onDialogueData }: RemiIntroProps) => {
                 setDialogueStage(option.nextStage);
                 if (option.nextStage === "end") {
                     if (onDialogueData) {
-                        // Calculate points based on player choice
                         let karmaPoints = 0;
                         let socialPoints = 0;
                         let salesPoints = 0;
@@ -79,7 +78,7 @@ const FetchCoffee = ({ onDialogueData }: RemiIntroProps) => {
                         
                         onDialogueData({
                             type: 'completed',
-                            finalStage: option.nextStage,
+                            stage: 'FetchCoffee',
                             karma: karmaPoints,
                             social: socialPoints,
                             sales: salesPoints

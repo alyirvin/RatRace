@@ -2,8 +2,6 @@
 
 import React, { useRef, useEffect, useState } from 'react';
 import Paw from "./components/paw";
-import SpeechBubble from "./components/speechBubble";
-import Remi from "./components/remi";
 import RemiIntro from './scenes/remiIntro';
 import WalkToDesk from './scenes/walkToDesk';
 import FetchCoffee from './scenes/fetchCoffee';
@@ -37,26 +35,17 @@ export default function Home() {
   const handleSceneTransition = (data: any) => {
     switch (currentScene) {
       case 'remiIntro':
-        // After Remi intro, go to task scene or next dialogue
         setCurrentScene('walkToDesk');
         break;
       case 'walkToDesk':
-        // After task assignment, go to work day
         setCurrentScene('fetchCoffee');
         break;
       case 'fetchCoffee':
-        // After fetching coffee, go to work day
         setCurrentScene('firstRatKingMeeting');
         break;
       case 'firstRatKingMeeting':
-        // After work day, advance to next day
-        // setDay(prev => prev + 1);
         setCurrentScene('remiIntro');
         break;
-      // case 'dayTransition':
-      //   // Reset for new day
-      //   setCurrentScene('remiIntro');
-      //   break;
       default:
         console.log('Unknown scene transition from:', currentScene);
     }

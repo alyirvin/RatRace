@@ -69,12 +69,12 @@ const RemiIntro = ({ onDialogueData }: RemiIntroProps) => {
                             karmaPoints = -1;
                         }
                         if (option.id === 'nervous') {
-                            socialPoints = 0; // neutral choice
+                            socialPoints = 0; 
                         }
                         
                         onDialogueData({
                             type: 'completed',
-                            finalStage: option.nextStage,
+                            stage: 'RemiIntro',
                             karma: karmaPoints,
                             social: socialPoints,
                             sales: salesPoints
