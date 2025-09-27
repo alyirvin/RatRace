@@ -17,31 +17,45 @@ interface RemiIntroProps {
     onDialogueData?: (data: any) => void;
 }
 
-const RemiIntro = ({ onDialogueData }: RemiIntroProps) => {
-    const [currentDialogue, setCurrentDialogue] = useState("Hey there! Welcome to Snout Farm, I'm Remi! I'm here to help you around on your first day. Are you ready?");
+const Racita = ({ onDialogueData }: RemiIntroProps) => {
+    const [currentDialogue, setCurrentDialogue] = useState("Hi there! You must be our new intern. I'm Racita, one of the insurance agents here. How's your first day going so far?");
     const [showOptions, setShowOptions] = useState(true);
     const [dialogueStage, setDialogueStage] = useState("initial");
     
     const allDialogueOptions: Record<string, DialogueOption[]> = {
         initial: [
             {
-                id: "helpful",
-                text: "Definitely! Let's do it!",
-                response: "Great! I love the attitude! Here, follow me.",
-                nextStage: "end"
+                id: "excited",
+                text: "Great! I'm eager to learn and contribute!",
+                response: "That's great to hear! Why don't you come by my desk in a bit and shadow me on some work?",
+                nextStage: "afterOffer"
             },
             {
                 id: "nervous", 
-                text: "I guess, I'm a little nervous.",
-                response: "That's ok, you'll get the hang of it soon enough.",
-                nextStage: "end"
+                text: "Alright, I guess. There's a lot to take in.",
+                response: "Ah I remember my first day too. Why don't you come by my desk in a bit and shadow me on some work?",
+                nextStage: "afterOffer"
             },
             {
                 id: "ew",
-                text: "Ugh not really.",
-                response: "Oh ok... Well I still need to show you around, so follow me.",
+                text: "None of your business.",
+                response: "Oh! Well okay then...",
                 nextStage: "end"
             },
+        ],
+        afterOffer: [
+            {
+                id: "accept",
+                text: "Sure! I'd love to learn from you.",
+                response: "Awesome! I'll see you at my desk in a bit.",
+                nextStage: "end"
+            },
+            {
+                id: "decline",
+                text: "Maybe later, I want to explore a bit more first.",
+                response: "No worries! Just let me know when you're ready.",
+                nextStage: "end"
+            }
         ]
     };
 
@@ -62,17 +76,25 @@ const RemiIntro = ({ onDialogueData }: RemiIntroProps) => {
                         let socialPoints = 0;
                         let salesPoints = 0;
                         
-                        if (option.id === 'helpful') {
+                        if (option.id === 'excited') {
                             socialPoints = 1;
-                            karmaPoints = 1;
                         }
                         if (option.id === 'ew') {
                             salesPoints = -1;
+                            socialPoints = -1;
                             karmaPoints = -1;
                         }
                         if (option.id === 'nervous') {
                             socialPoints = 0; 
                         }
+                        if (option.id === 'accept') {
+                            socialPoints = 1;
+                            salesPoints = 1;
+                        }
+                        if (option.id === 'decline') {
+                            salesPoints = -1;
+                        }
+
                         
                         onDialogueData({
                             type: 'completed',
@@ -121,4 +143,4 @@ const RemiIntro = ({ onDialogueData }: RemiIntroProps) => {
     );
 };
 
-export default RemiIntro;
+export default Racita;

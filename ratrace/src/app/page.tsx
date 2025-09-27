@@ -6,6 +6,7 @@ import RemiIntro from './scenes/remiIntro';
 import WalkToDesk from './scenes/walkToDesk';
 import FetchCoffee from './scenes/fetchCoffee';
 import FirstRatKingMeeting from './scenes/firstRatKingMeeting';
+import Racita from './scenes/racita';
 
 export default function Home() {
   const [day, setDay] = useState(1);
@@ -44,8 +45,10 @@ export default function Home() {
         setCurrentScene('firstRatKingMeeting');
         break;
       case 'firstRatKingMeeting':
-        setCurrentScene('remiIntro');
+        setCurrentScene('racita');
         break;
+      case 'racita':
+        setCurrentScene('remiIntro'); 
       default:
         console.log('Unknown scene transition from:', currentScene);
     }
@@ -61,6 +64,8 @@ export default function Home() {
         return <FetchCoffee onDialogueData={handleDialogueData} />;
       case 'firstRatKingMeeting':
         return <FirstRatKingMeeting onDialogueData={handleDialogueData} />
+      case 'racita':
+        return <Racita onDialogueData={handleDialogueData} />
       default:
         return <div className="text-white text-center">Unknown scene: {currentScene}</div>;
     }
