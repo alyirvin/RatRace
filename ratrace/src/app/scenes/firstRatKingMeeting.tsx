@@ -17,7 +17,7 @@ interface RemiIntroProps {
 }
 
 const FirstRatKingMeeting = ({ onDialogueData }: RemiIntroProps) => {
-    const [currentDialogue, setCurrentDialogue] = useState("Inside, you see a massive leather chair turned away from you. Smoke curls into the air. You can feel him judging you already.");
+    const [currentDialogue, setCurrentDialogue] = useState("What are you doing in MY office intern? Don't you know I'm busy!");
     const [showOptions, setShowOptions] = useState(true);
     const [dialogueStage, setDialogueStage] = useState("initial");
     const [karma, setKarma] = useState(0);
