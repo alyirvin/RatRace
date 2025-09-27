@@ -23,9 +23,6 @@ const WalkToDesk = ({ onDialogueData }: RemiIntroProps) => {
         `You can keep track of your coworker points here!`);
     const [showOptions, setShowOptions] = useState(true);
     const [dialogueStage, setDialogueStage] = useState("initial");
-    const [karma, setKarma] = useState(0);
-    const [social, setSocial] = useState(0);
-    const [sales, setSales] = useState(0);
     
     const allDialogueOptions: Record<string, DialogueOption[]> = {
         initial: [
@@ -57,33 +54,36 @@ const WalkToDesk = ({ onDialogueData }: RemiIntroProps) => {
     const handleOptionClick = (option: DialogueOption) => {
         setCurrentDialogue(option.response);
         setShowOptions(false);
-  
-        if (onDialogueData) {
-            if (option.id === 'helpful')
-                { 
-                    setKarma(karma + 1);
-                    setSocial(social + 1);
-                    setSales(sales + 1);
-                }
-            if (option.id === 'nervous') setSocial(social + 1);
-            if (option.id === `ew`) 
-            {
-                setSocial(social - 1);
-                setKarma(karma - 1);
-            }
-        }
         
         setTimeout(() => {
             if (option.nextStage) {
                 setDialogueStage(option.nextStage);
                 if (option.nextStage === "end") {
                     if (onDialogueData) {
+                        // Calculate points based on player choice
+                        let karmaPoints = 0;
+                        let socialPoints = 0;
+                        let salesPoints = 0;
+                        
+                        if (option.id === 'helpful') {
+                            karmaPoints = 1;
+                            socialPoints = 1;
+                            salesPoints = 1;
+                        }
+                        if (option.id === 'nervous') {
+                            socialPoints = 1;
+                        }
+                        if (option.id === 'ew') {
+                            socialPoints = -1;
+                            karmaPoints = -1;
+                        }
+                        
                         onDialogueData({
                             type: 'completed',
                             finalStage: option.nextStage,
-                            karma: karma,
-                            social: social,
-                            sales: sales
+                            karma: karmaPoints,
+                            social: socialPoints,
+                            sales: salesPoints
                         });
                     }
                 } else {

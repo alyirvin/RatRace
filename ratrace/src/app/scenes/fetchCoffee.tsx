@@ -18,13 +18,10 @@ interface RemiIntroProps {
 }
 
 const FetchCoffee = ({ onDialogueData }: RemiIntroProps) => {
-    const [currentDialogue, setCurrentDialogue] = useState(`Now that I've shown you your desk, it's now time for your first task!` +
+    const [currentDialogue, setCurrentDialogue] = useState(`Now that I've shown you your desk, it's now time for your first task! ` +
         `Go grab a coffee from the break room and bring it to King Rat. He's in his office right now, and be careful, he's very... critical`);
     const [showOptions, setShowOptions] = useState(true);
     const [dialogueStage, setDialogueStage] = useState("initial");
-    const [karma, setKarma] = useState(0);
-    const [social, setSocial] = useState(0);
-    const [sales, setSales] = useState(0);
     
     const allDialogueOptions: Record<string, DialogueOption[]> = {
         initial: [
@@ -56,36 +53,36 @@ const FetchCoffee = ({ onDialogueData }: RemiIntroProps) => {
     const handleOptionClick = (option: DialogueOption) => {
         setCurrentDialogue(option.response);
         setShowOptions(false);
-  
-        if (onDialogueData) {
-            if (option.id === 'helpful')
-                { 
-                    setSocial(social + 1);
-                    setSales(sales + 1);
-                }
-            if (option.id === 'nervous') 
-                {
-                    setSales(sales + 1);
-                    setSocial(social - 1);
-                }
-            if (option.id === `ew`) 
-            {
-                setSocial(social - 1);
-                setSales(sales - 1);
-            }
-        }
         
         setTimeout(() => {
             if (option.nextStage) {
                 setDialogueStage(option.nextStage);
                 if (option.nextStage === "end") {
                     if (onDialogueData) {
+                        // Calculate points based on player choice
+                        let karmaPoints = 0;
+                        let socialPoints = 0;
+                        let salesPoints = 0;
+                        
+                        if (option.id === 'helpful') {
+                            socialPoints = 1;
+                            salesPoints = 1;
+                        }
+                        if (option.id === 'nervous') {
+                            salesPoints = 1;
+                            socialPoints = -1;
+                        }
+                        if (option.id === 'ew') {
+                            socialPoints = -1;
+                            salesPoints = -1;
+                        }
+                        
                         onDialogueData({
                             type: 'completed',
                             finalStage: option.nextStage,
-                            karma: karma,
-                            social: social,
-                            sales: sales
+                            karma: karmaPoints,
+                            social: socialPoints,
+                            sales: salesPoints
                         });
                     }
                 } else {

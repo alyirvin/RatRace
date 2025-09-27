@@ -19,9 +19,6 @@ const RemiIntro = ({ onDialogueData }: RemiIntroProps) => {
     const [currentDialogue, setCurrentDialogue] = useState("Hey there! Welcome to Snout Farm, I'm Remi! I'm here to help you around on your first day. Are you ready?");
     const [showOptions, setShowOptions] = useState(true);
     const [dialogueStage, setDialogueStage] = useState("initial");
-    const [karma, setKarma] = useState(0);
-    const [social, setSocial] = useState(0);
-    const [sales, setSales] = useState(0);
     
     const allDialogueOptions: Record<string, DialogueOption[]> = {
         initial: [
@@ -53,26 +50,34 @@ const RemiIntro = ({ onDialogueData }: RemiIntroProps) => {
     const handleOptionClick = (option: DialogueOption) => {
         setCurrentDialogue(option.response);
         setShowOptions(false);
-  
-        if (onDialogueData) {
-            if (option.id === 'helpful') setSocial(social + 1);
-            if (option.id === `ew`) 
-            {
-                setSales(sales - 1);
-            }
-        }
         
         setTimeout(() => {
             if (option.nextStage) {
                 setDialogueStage(option.nextStage);
                 if (option.nextStage === "end") {
                     if (onDialogueData) {
+                        let karmaPoints = 0;
+                        let socialPoints = 0;
+                        let salesPoints = 0;
+                        
+                        if (option.id === 'helpful') {
+                            socialPoints = 1;
+                            karmaPoints = 1;
+                        }
+                        if (option.id === 'ew') {
+                            salesPoints = -1;
+                            karmaPoints = -1;
+                        }
+                        if (option.id === 'nervous') {
+                            socialPoints = 0; // neutral choice
+                        }
+                        
                         onDialogueData({
                             type: 'completed',
                             finalStage: option.nextStage,
-                            karma: karma,
-                            social: social,
-                            sales: sales
+                            karma: karmaPoints,
+                            social: socialPoints,
+                            sales: salesPoints
                         });
                     }
                 } else {

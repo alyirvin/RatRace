@@ -6,6 +6,7 @@ import SpeechBubble from "./components/speechBubble";
 import Remi from "./components/remi";
 import RemiIntro from './scenes/remiIntro';
 import WalkToDesk from './scenes/walkToDesk';
+import FetchCoffee from './scenes/fetchCoffee';
 import FirstRatKingMeeting from './scenes/firstRatKingMeeting';
 
 export default function Home() {
@@ -41,6 +42,10 @@ export default function Home() {
         break;
       case 'walkToDesk':
         // After task assignment, go to work day
+        setCurrentScene('fetchCoffee');
+        break;
+      case 'fetchCoffee':
+        // After fetching coffee, go to work day
         setCurrentScene('firstRatKingMeeting');
         break;
       case 'firstRatKingMeeting':
@@ -63,6 +68,8 @@ export default function Home() {
         return <RemiIntro onDialogueData={handleDialogueData} />;
       case 'walkToDesk':
         return <WalkToDesk onDialogueData={handleDialogueData} />;
+      case 'fetchCoffee':
+        return <FetchCoffee onDialogueData={handleDialogueData} />;
       case 'firstRatKingMeeting':
         return <FirstRatKingMeeting onDialogueData={handleDialogueData} />
       default:
