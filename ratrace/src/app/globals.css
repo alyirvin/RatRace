@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  /* background: var(--background); */
+  /* color: var(--foreground); */
+  font-family: Arial, Helvetica, sans-serif;
+  overflow: hidden;
+}
+
+/* Hide Next.js development badge */
+div[data-nextjs-toast-errors-parent],
+div[data-nextjs-dialog-overlay],
+.__next-dev-overlay-drag-handle,
+[data-nextjs-toast-errors-parent] {
+  display: none !important;
+}
