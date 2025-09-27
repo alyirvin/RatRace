@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import SpeechBubble from '../components/speechBubble';
-import Ratcita from '../components/racitia';
+import RatcitaImage from '../components/ratcita';
 import Office from '../images/office.png';
 import Image from 'next/image';
 
@@ -17,7 +17,7 @@ interface RemiIntroProps {
     onDialogueData?: (data: any) => void;
 }
 
-const Racita = ({ onDialogueData }: RemiIntroProps) => {
+const Ratcita = ({ onDialogueData }: RemiIntroProps) => {
     const [currentDialogue, setCurrentDialogue] = useState("Hi there! You must be our new intern. I'm Racita, one of the insurance agents here. How's your first day going so far?");
     const [showOptions, setShowOptions] = useState(true);
     const [dialogueStage, setDialogueStage] = useState("initial");
@@ -135,7 +135,7 @@ const Racita = ({ onDialogueData }: RemiIntroProps) => {
             
             <div className="w-[100vw] h-[100vw]">
                 <div className="absolute z-1 top-[-150] left-[50%] translate-x-[-50%] scale-[0.5]">
-                    <Ratcita />
+                    <RatcitaImage />
                 </div>
                 <Image src={Office} alt="Office Background" className="absolute -z-1 bottom-40 right-64 scale-[1.5]"/>
             </div>
@@ -143,4 +143,4 @@ const Racita = ({ onDialogueData }: RemiIntroProps) => {
     );
 };
 
-export default Racita;
+export default Ratcita;
