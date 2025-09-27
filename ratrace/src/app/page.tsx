@@ -6,9 +6,8 @@ import RemiIntro from './scenes/remiIntro';
 import WalkToDesk from './scenes/walkToDesk';
 import FetchCoffee from './scenes/fetchCoffee';
 import FirstRatKingMeeting from './scenes/firstRatKingMeeting';
-import Racita from './scenes/ratcita';
+import Ratcita from './scenes/ratcita';
 import KingExplainTutorial from './scenes/kingExplainTutorial';
-import DeclarationsQuiz from './scenes/declarationsQuiz';
 
 export default function Home() {
   const [day, setDay] = useState(1);
@@ -41,7 +40,7 @@ export default function Home() {
       //   setCurrentScene('remiIntro');
       //   break;
       case 'remiIntro':
-        setCurrentScene('walkToDesk');
+        setCurrentScene('ratcita');
         break;
       case 'walkToDesk':
         setCurrentScene('fetchCoffee');
@@ -53,10 +52,16 @@ export default function Home() {
         setCurrentScene('kingExplainTutorial');
         break;
       case 'kingExplainTutorial':
-        setCurrentScene('racita');
+        setCurrentScene('ratcita');
         break;
-      case 'racita':
-        setCurrentScene('remiIntro'); 
+      case 'ratcita':
+        setCurrentScene('shadowRacita'); 
+        break;
+      case 'shadowRacita':
+        setCurrentScene('talkAfterShadowing');
+        break;
+      case 'talkAfterShadowing':
+        setCurrentScene('remiIntro');
       default:
         console.log('Unknown scene transition from:', currentScene);
     }
@@ -74,10 +79,12 @@ export default function Home() {
         return <FirstRatKingMeeting onDialogueData={handleDialogueData} />
       case 'kingExplainTutorial':
         return <KingExplainTutorial onDialogueData={handleDialogueData}/>
-      case 'racita':
-        return <Racita onDialogueData={handleDialogueData} />
-      case 'declarationsQuiz':
-        return <DeclarationsQuiz onDialogueData={handleDialogueData} />
+      case 'ratcita':
+        return <Ratcita onDialogueData={handleDialogueData} />
+      case 'shadowRacita':
+        return <ShadowRacita onDialogueData={handleDialogueData} />
+      case 'talkAfterShadowing':
+        return <TalkAfterShadowing onDialogueData={handleDialogueData} />
       default:
         return <div className="text-white text-center">Unknown scene: {currentScene}</div>;
     }

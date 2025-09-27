@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import SpeechBubble from '../components/speechBubble';
-import RatcitaImage from '../components/ratcita';
+import Ratcita from '../components/ratcitia';
 import Office from '../images/office.png';
 import Image from 'next/image';
 
@@ -17,8 +17,8 @@ interface RemiIntroProps {
     onDialogueData?: (data: any) => void;
 }
 
-const Ratcita = ({ onDialogueData }: RemiIntroProps) => {
-    const [currentDialogue, setCurrentDialogue] = useState("Hi there! You must be our new intern. I'm Racita, one of the insurance agents here. How's your first day going so far?");
+const TalkAfterShadowing = ({ onDialogueData }: RemiIntroProps) => {
+    const [currentDialogue, setCurrentDialogue] = useState("Good job! I think you've done all the shadowing you need. Why not you go back to your desk and fill out this paperwork.");
     const [showOptions, setShowOptions] = useState(true);
     const [dialogueStage, setDialogueStage] = useState("initial");
     
@@ -26,36 +26,16 @@ const Ratcita = ({ onDialogueData }: RemiIntroProps) => {
         initial: [
             {
                 id: "excited",
-                text: "Great! I'm eager to learn and contribute!",
-                response: "That's great to hear! Why don't you come by my desk in a bit and shadow me on some work?",
-                nextStage: "afterOffer"
-            },
-            {
-                id: "nervous", 
-                text: "Alright, I guess. There's a lot to take in.",
-                response: "Ah I remember my first day too. Why don't you come by my desk in a bit and shadow me on some work?",
-                nextStage: "afterOffer"
+                text: "Sounds Good! Thanks Ratcita!",
+                response: "You're welcome! Come find me if you need help.",
+                nextStage: "end"
             },
             {
                 id: "ew",
-                text: "None of your business.",
-                response: "Oh! Well okay then...",
+                text: "Uhhh more work, I'm good",
+                response: "Oh, well that not really how things work here, sorry.",
                 nextStage: "end"
             },
-        ],
-        afterOffer: [
-            {
-                id: "accept",
-                text: "Sure! I'd love to learn from you.",
-                response: "Awesome! I'll see you at my desk in a bit.",
-                nextStage: "end"
-            },
-            {
-                id: "decline",
-                text: "Maybe later, I want to explore a bit more first.",
-                response: "No worries! Just let me know when you're ready.",
-                nextStage: "end"
-            }
         ]
     };
 
@@ -78,24 +58,12 @@ const Ratcita = ({ onDialogueData }: RemiIntroProps) => {
                         
                         if (option.id === 'excited') {
                             socialPoints = 1;
+                            salesPoints = 1;
                         }
                         if (option.id === 'ew') {
                             salesPoints = -1;
                             socialPoints = -1;
-                            karmaPoints = -1;
                         }
-                        if (option.id === 'nervous') {
-                            socialPoints = 0; 
-                        }
-                        if (option.id === 'accept') {
-                            socialPoints = 1;
-                            salesPoints = 1;
-                        }
-                        if (option.id === 'decline') {
-                            salesPoints = -1;
-                        }
-
-                        
                         onDialogueData({
                             type: 'completed',
                             stage: 'Ratcita',
@@ -134,8 +102,8 @@ const Ratcita = ({ onDialogueData }: RemiIntroProps) => {
             )}
             
             <div className="w-[100vw] h-[100vw]">
-                <div className="absolute z-1 top-[-150] left-[50%] translate-x-[-50%] scale-[0.5]">
-                    <RatcitaImage />
+                <div className="absolute z-1 top-[-175] left-[50%] translate-x-[-50%] scale-[0.5]">
+                    <Ratcita />
                 </div>
                 <Image src={Office} alt="Office Background" className="absolute -z-1 bottom-40 right-64 scale-[1.5]"/>
             </div>
@@ -143,4 +111,4 @@ const Ratcita = ({ onDialogueData }: RemiIntroProps) => {
     );
 };
 
-export default Ratcita;
+export default TalkAfterShadowing;
