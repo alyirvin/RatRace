@@ -6,8 +6,11 @@ import RemiIntro from './scenes/remiIntro';
 import WalkToDesk from './scenes/walkToDesk';
 import FetchCoffee from './scenes/fetchCoffee';
 import FirstRatKingMeeting from './scenes/firstRatKingMeeting';
+import DeclarationsQuiz from './scenes/declarationsQuiz';
 import Ratcita from './scenes/ratcita';
 import KingExplainTutorial from './scenes/kingExplainTutorial';
+import ShadowRatcita from './scenes/shadowRatcita';
+import TalkAfterShadowing from './scenes/talkAfterShadowing';
 
 export default function Home() {
   const [day, setDay] = useState(1);
@@ -82,7 +85,7 @@ export default function Home() {
       case 'ratcita':
         return <Ratcita onDialogueData={handleDialogueData} />
       case 'shadowRacita':
-        return <ShadowRacita onDialogueData={handleDialogueData} />
+        return <ShadowRatcita onDialogueData={handleDialogueData} />
       case 'talkAfterShadowing':
         return <TalkAfterShadowing onDialogueData={handleDialogueData} />
       default:
