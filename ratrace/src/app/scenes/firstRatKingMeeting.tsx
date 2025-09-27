@@ -2,9 +2,7 @@
 
 import React, { useState } from 'react';
 import SpeechBubble from '../components/speechBubble';
-import Remi from '../components/remi';
-import ComputerView from '../images/computerView.png';
-import Image from 'next/image';
+import RatKing from '../components/ratKing';
 
 interface DialogueOption {
     id: string;
@@ -17,10 +15,8 @@ interface RemiIntroProps {
     onDialogueData?: (data: any) => void;
 }
 
-const WalkToDesk = ({ onDialogueData }: RemiIntroProps) => {
-    const [currentDialogue, setCurrentDialogue] = useState(`Here's your desk with your computer. Since you're an intern right now, you'll be given tasks ` +
-        `to help the other employees. The more you complete tasks and talk to your coworkers, the better your relationship with them will be! ` +
-        `You can keep track of your coworker points here!`);
+const FirstRatKingMeeting = ({ onDialogueData }: RemiIntroProps) => {
+    const [currentDialogue, setCurrentDialogue] = useState("Inside, you see a massive leather chair turned away from you. Smoke curls into the air. You can feel him judging you already.");
     const [showOptions, setShowOptions] = useState(true);
     const [dialogueStage, setDialogueStage] = useState("initial");
     const [karma, setKarma] = useState(0);
@@ -31,20 +27,20 @@ const WalkToDesk = ({ onDialogueData }: RemiIntroProps) => {
         initial: [
             {
                 id: "helpful",
-                text: "Awesome! I love talking to new people!",
-                response: "That's great! You'll fit in perfectly then!",
+                text: "Good morning, sir! Brought your coffee just the way you like it.",
+                response: "Hmm. Polite. Efficient. Acceptable.",
                 nextStage: "end"
             },
             {
                 id: "nervous", 
-                text: "That's cool I guess.",
-                response: "Yeah we're a really friendly bunch so feel free to start talking to anyone!",
+                text: "Here’s your coffee. I had more important things to do, but whatever.",
+                response: "Well. Remind me never to rely on you for anything mission-critical.",
                 nextStage: "end"
             },
             {
                 id: "ew",
-                text: "Why should I do any of that? You sound terrible.",
-                response: "Well because we're all pretty nice people who want to help you, but also because it's your job...",
+                text: "*Throw the coffee at king rat*",
+                response: "RAAAAAAAAHHHHHHHHHHHHH",
                 nextStage: "end"
             },
         ]
@@ -60,16 +56,18 @@ const WalkToDesk = ({ onDialogueData }: RemiIntroProps) => {
   
         if (onDialogueData) {
             if (option.id === 'helpful')
-                { 
-                    setKarma(karma + 1);
-                    setSocial(social + 1);
-                    setSales(sales + 1);
-                }
-            if (option.id === 'nervous') setSocial(social + 1);
-            if (option.id === `ew`) 
+            {
+                setSocial(social + 1);
+                setSales(sales + 1);
+            }
+            if (option.id == 'nervous')
             {
                 setSocial(social - 1);
-                setKarma(karma - 1);
+            }
+            if (option.id === `ew`) 
+            {
+                setSales(sales - 2);
+                setSocial(social -1);
             }
         }
         
@@ -97,12 +95,12 @@ const WalkToDesk = ({ onDialogueData }: RemiIntroProps) => {
 
     return (
         <div className="w-full h-full relative">
-            <div className="z-2 absolute top-[25%] left-[3%]">
-                <SpeechBubble orientation="left" message={currentDialogue}/>
+            <div className="absolute top-[25%] left-[7%]">
+                <SpeechBubble orientation="right" message={currentDialogue}/>
             </div>
             
             {showOptions && (
-                <div className="z-2 absolute bottom-[10%] left-1/2 transform -translate-x-1/2 w-[60%] max-w-[500px] flex flex-col gap-3 z-10">
+                <div className="absolute bottom-[10%] left-1/2 transform -translate-x-1/2 w-[60%] max-w-[500px] flex flex-col gap-3 z-10">
                     {getCurrentOptions().map((option: DialogueOption) => (
                         <button
                             key={option.id}
@@ -114,12 +112,12 @@ const WalkToDesk = ({ onDialogueData }: RemiIntroProps) => {
                     ))}
                 </div>
             )}
-
-            <div className="z-0 w-[100vw] h-[100vh] flex justify-center items-center absolute bottom-30 right-0 ">
-                <Image src={ComputerView} alt="Computer View" className="" />
+            
+            <div className="z-1 w-[100vw] h-[100vw] flex justify-center items-center absolute bottom-[-25vh] right-[-15vw] scale-[0.75]">
+                <RatKing />
             </div>
         </div>
     );
 };
 
-export default WalkToDesk;
+export default FirstRatKingMeeting;
