@@ -31,7 +31,7 @@ const WalkToDesk = ({ onDialogueData }: RemiIntroProps) => {
         initial: [
             {
                 id: "helpful",
-                text: "Awesome! I love talkiing to new people!",
+                text: "Awesome! I love talking to new people!",
                 response: "That's great! You'll fit in perfectly then!",
                 nextStage: "afterHelpful"
             },
