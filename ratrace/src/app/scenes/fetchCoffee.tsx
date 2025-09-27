@@ -113,7 +113,7 @@ const FetchCoffee = ({ onDialogueData }: RemiIntroProps) => {
                 </div>
             )}
 
-            <div className="z-0 w-[100vw] h-[100vh] flex justify-center items-center absolute bottom-30 right-0 ">
+            <div className="z-0 w-[100vw] h-[100vh] flex justify-center items-center absolute bottom-28 right-0 ">
                 <Image src={ComputerView} alt="Computer View" className="" />
             </div>
         </div>

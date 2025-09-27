@@ -93,7 +93,7 @@ const RemiIntro = ({ onDialogueData }: RemiIntroProps) => {
 
     return (
         <div className="w-full h-full relative">
-            <div className="absolute top-[17%] left-[7%]">
+            <div className="absolute top-[25%] left-[7%]">
                 <SpeechBubble orientation="right" message={currentDialogue}/>
             </div>
             
@@ -112,7 +112,7 @@ const RemiIntro = ({ onDialogueData }: RemiIntroProps) => {
             )}
             
             <div className="w-[100vw] h-[100vw]">
-                <div className="absolute z-1 top-[-50%] left-[70%] translate-x-[-50%] scale-[2]">
+                <div className="absolute z-1 top-[-150] left-[50%] translate-x-[-50%] scale-[0.5]">
                     <Remi />
                 </div>
                 <Image src={Office} alt="Office Background" className="absolute -z-1 bottom-40 right-64 scale-[1.5]"/>

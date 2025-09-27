@@ -5,7 +5,7 @@ import Image from 'next/image';
 const Remi = () => {
 
     return (
-        <div className="w-[30vw] h-[100vh] z-1 relative">
+        <div className="w-[60vw] h-[150vh] z-1 relative">
             <Image src={RemiImage} alt="Remi" layout="fill" objectFit="cover" />
         </div>
     );

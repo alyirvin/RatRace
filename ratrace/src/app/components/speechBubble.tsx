@@ -28,7 +28,7 @@ const SpeechBubble = ({ orientation, message }: SpeechBubbleProps) => {
             }}></div>
             <div 
                 ref={bubbleRef}
-                className={`relative min-w-[100px] min-h-[60px] max-w-[500px] bg-gray-400 rounded-2xl p-4`}
+                className={`relative min-w-[100px] min-h-[60px] max-w-[400px] bg-gray-400 rounded-2xl p-4`}
             >
                 <p className={`text-white text-center break-words ${orientation === 'left' ? '' : 'scale-x-[-1]'}`}>{message}</p>
             </div>

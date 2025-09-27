@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import NarrationBubble from '../components/narrationBubble';
 import SpeechBubble from '../components/speechBubble';
 import RatKing from '../components/ratKing';
-import RatKingOffice from '../images/ratKingRoom.png';
+import RatKingOffice from '../images/Less tall Rat King room.png';
 import Image from 'next/image';
 
 
@@ -114,7 +114,7 @@ const FirstRatKingMeeting = ({ onDialogueData }: RemiIntroProps) => {
             )}
             
             
-            <div className="z-0 w-[100vw] h-[100vh] flex justify-center items-center absolute bottom-30 right-0 ">
+            <div className="z-0 w-[100vw] h-[100vh] flex justify-center items-center absolute bottom-20 right-0 ">
                 <Image src={RatKingOffice} alt="Rat King Office" className="" />
             </div>
         </div>
