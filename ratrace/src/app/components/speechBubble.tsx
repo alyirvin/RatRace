@@ -20,7 +20,7 @@ const SpeechBubble = ({ orientation, message }: SpeechBubbleProps) => {
     }, [message]);
 
     return (
-        <div className={`flex flex-row justify-center items-center ${orientation === 'left' ? '' : 'scale-x-[-1]'}`}>
+        <div className={`flex flex-row justify-center items-center text-lg ${orientation === 'left' ? '' : 'scale-x-[-1]'}`}>
             <div className={`w-0 h-0 translate-x-1`} style={{
                 borderTop: `${triangleSize}px solid transparent`,
                 borderRight: `${triangleSize}px solid #9ca3af`,

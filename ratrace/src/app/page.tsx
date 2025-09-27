@@ -68,13 +68,7 @@ export default function Home() {
 
   return (
     <div className="flex items-end h-[100vh] overflow-hidden">
-      <div className="z-10 absolute right-10 top-10 text-4xl">Day {day}</div>
-      <div className="absolute left-10 top-10 text-sm text-white">
-        <div>Scene: {currentScene}</div>
-        <div>Karma: {playerData.karma}</div>
-        <div>Social: {playerData.social}</div>
-        <div>Sales: {playerData.sales}</div>
-      </div>
+      <div className="z-10 absolute right-10 top-10 text-4xl font-bold">Day {day}</div>
       
       {renderCurrentScene()}
       

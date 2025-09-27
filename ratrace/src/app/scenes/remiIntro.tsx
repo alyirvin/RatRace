@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import SpeechBubble from '../components/speechBubble';
 import Remi from '../components/remi';
+import Office from '../images/office.png';
+import Image from 'next/image';
 
 interface DialogueOption {
     id: string;
@@ -91,12 +93,12 @@ const RemiIntro = ({ onDialogueData }: RemiIntroProps) => {
 
     return (
         <div className="w-full h-full relative">
-            <div className="absolute top-[25%] left-[7%]">
+            <div className="absolute top-[17%] left-[7%]">
                 <SpeechBubble orientation="right" message={currentDialogue}/>
             </div>
             
             {showOptions && (
-                <div className="absolute bottom-[10%] left-1/2 transform -translate-x-1/2 w-[60%] max-w-[500px] flex flex-col gap-3 z-10">
+                <div className="z-2 absolute bottom-[10%] left-1/2 transform -translate-x-1/2 w-[60%] max-w-[500px] flex flex-col gap-3 z-10">
                     {getCurrentOptions().map((option: DialogueOption) => (
                         <button
                             key={option.id}
@@ -109,8 +111,11 @@ const RemiIntro = ({ onDialogueData }: RemiIntroProps) => {
                 </div>
             )}
             
-            <div className="z-1 w-[100vw] h-[100vw] flex justify-center items-center absolute bottom-[-25vh] right-[-15vw] scale-[0.75]">
-                <Remi />
+            <div className="w-[100vw] h-[100vw]">
+                <div className="absolute z-1 top-[-50%] left-[70%] translate-x-[-50%] scale-[2]">
+                    <Remi />
+                </div>
+                <Image src={Office} alt="Office Background" className="absolute -z-1 bottom-40 right-64 scale-[1.5]"/>
             </div>
         </div>
     );
