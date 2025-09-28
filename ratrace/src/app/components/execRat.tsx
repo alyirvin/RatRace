@@ -1,5 +1,5 @@
 import React from 'react';
-import ExecRatImage from "../images/Phone Girl.png";
+import ExecRatImage from "../images/The big cheese.png";
 import Image from 'next/image';
 
 const ExecRat = () => {
