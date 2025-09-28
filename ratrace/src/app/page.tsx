@@ -41,9 +41,9 @@ export default function Home() {
 
   const handleSceneTransition = (data: any) => {
     switch (currentScene) {
-      // case 'declarationsQuiz':
-      //   setCurrentScene('remiIntro');
-      //   break;
+      case 'declarationsQuiz':
+        setCurrentScene('remiIntro');
+        break;
       case 'remiIntro':
         setCurrentScene('walkToDesk');
         break;
@@ -109,7 +109,7 @@ export default function Home() {
 
   return (
     <div className="flex items-end h-[100vh] overflow-hidden">
-      <div className="z-10 absolute right-5 top-5 text-4xl font-bold">Day {day}</div>
+      {/* <div className="z-10 absolute right-5 top-5 text-4xl font-bold">Day {day}</div> */}
       
       {renderCurrentScene()}
       

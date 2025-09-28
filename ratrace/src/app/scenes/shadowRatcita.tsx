@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import SpeechBubble from '../components/speechBubble';
 import Ratcita from '../components/ratcita';
 import Office from '../images/office.png';
-import Desk from '../images/Personal desk on seats.png'
+import Desk from '../images/computer_on.png'
 import Image from 'next/image';
 
 interface DialogueOption {
