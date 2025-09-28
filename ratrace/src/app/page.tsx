@@ -16,6 +16,7 @@ import RemiPartTwo from './scenes/remiPartTwo';
 // import RakeWelcomesYou from './scenes/rakeWelcomesYou';
 // import Ratilda from './scenes/ratildaScene';
 // import RakeWelcomesAgain from './scenes/rakeWelcomesAgain';
+import ClaimRatOne from './scenes/claimRatOne';
 import RatnoldNeedsHelp from './scenes/ratnoldNeedsHelp';
 import HelpRatnold from './scenes/helpRatnold';
 
@@ -80,7 +81,7 @@ export default function Home() {
         setCurrentScene('remiPartTwo');
         break;
       case 'remiPartTwo':
-        setCurrentScene('remiWelcomesAgain');
+        setCurrentScene('claimRatOne');
         break;
       // case 'rakeWelcomesYou':
       //   setCurrentScene('remiIntro');
@@ -88,6 +89,8 @@ export default function Home() {
       //   setCurrentScene("remiIntro");
       // case 'rakeWelcomesAgain':
       //   setCurrentScene('remiIntro');
+      case 'claimRatOne':
+        setCurrentScene('remiIntro')
       default:
         console.log('Unknown scene transition from:', currentScene);
     }
@@ -123,6 +126,9 @@ export default function Home() {
       //   return <Ratilda onDialogueData={handleDialogueData} />
       // case 'rakeWelcomesAgain':
       //   return <RakeWelcomesAgain onDialogueData={handleDialogueData} />
+      case 'claimRatOne':
+        return <ClaimRatOne onDialogueData={handleDialogueData} />
+      
       default:
         return <div className="text-white text-center">Unknown scene: {currentScene}</div>;
     }
