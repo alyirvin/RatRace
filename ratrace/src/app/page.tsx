@@ -15,7 +15,7 @@ import RakeFromSnoutFarm from './scenes/rakeFromSnoutFarm';
 
 export default function Home() {
   const [day, setDay] = useState(1);
-  const [currentScene, setCurrentScene] = useState('declarationsQuiz');
+  const [currentScene, setCurrentScene] = useState('remiIntro');
   const [playerData, setPlayerData] = useState({
     karma: 0,
     social: 0,
@@ -94,6 +94,8 @@ export default function Home() {
         return <TalkAfterShadowing onDialogueData={handleDialogueData} />
       case 'rakeFromSnoutFarm':
         return <RakeFromSnoutFarm onDialogueData={handleDialogueData} />
+      case 'declarationsQuiz':
+        return <DeclarationsQuiz onDialogueData={handleDialogueData} />
       default:
         return <div className="text-white text-center">Unknown scene: {currentScene}</div>;
     }
