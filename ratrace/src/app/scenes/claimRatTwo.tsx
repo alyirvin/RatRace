@@ -16,8 +16,8 @@ interface RemiIntroProps {
     onDialogueData?: (data: any) => void;
 }
 
-const ClaimRatOne = ({ onDialogueData }: RemiIntroProps) => {
-    const [currentDialogue, setCurrentDialogue] = useState("*On the phone* Hello? Hello can you hear me?");
+const ClaimRatTwo = ({ onDialogueData }: RemiIntroProps) => {
+    const [currentDialogue, setCurrentDialogue] = useState("*On the phone* Help me!! Please someone help meeeee");
     const [showOptions, setShowOptions] = useState(true);
     const [dialogueStage, setDialogueStage] = useState("initial");
     
@@ -25,34 +25,28 @@ const ClaimRatOne = ({ onDialogueData }: RemiIntroProps) => {
         initial: [
             {
                 id: "helpful",
-                text: "Yes hello I can hear you, how may I help you?",
-                response: "My stored cheese broke a pipe and now my basement is flooded. Is this covered?",
-                nextStage: "solutions"
-            },
-            {
-                id: "ew",
-                text: "Obviously I can hear you",
-                response: "Well aren't you rude. I don't have time for this, my stored cheese broke a pipe and now my basement is flooded. Is this covered?",
+                text: "What is the problem?",
+                response: "I've been traumatized! This cat almost killed me!! Thankfully they barely left a scratch, but I need therapy now. Will you cover it?",
                 nextStage: "solutions"
             },
         ],
         solutions: [
             {
                 id: "kind",
-                text: "I am sorry to hear that! Accidental water damage may be covered, but damages caused by cheese usually are not. Let us check your policy details together.",
-                response: "Oh thank you, that's so kind of you to be so thourough",
-                nextStage: "end"
-            },
-            {
-                id: "neutral",
-                text: "That’s hilarious! No way we’re paying for your cheese pool party.",
-                response: "I don't need this right now. If you're not going to help then I'm leaving",
+                text: "Oh that's just terrible! Since this is all mental and emotional based, I'm not 100% sure if your insurance will cover it. Let us check your policy details together.",
+                response: "Thank you thank you thank you!!",
                 nextStage: "end"
             },
             {
                 id: "bad",
-                text: "Basements flood all the time, get over it",
-                response: "OMG Rude!! Do you not realize how expensive my stuff in there was and it's all ruined!",
+                text: "No why would that be covered under your plan? We're here to fix bigger problems.",
+                response: "Fine! Maybe I'll just go find a better insurance company then.",
+                nextStage: "end"
+            },
+            {
+                id: "neutral",
+                text: "Are you sure you need therapy? Maybe you're just still feeling the initial shock and need to lie down.",
+                response: "Do not tell me to lie down! I know what I experienced and I need compensation for it now!",
                 nextStage: "end"
             }
         ]
@@ -79,10 +73,6 @@ const ClaimRatOne = ({ onDialogueData }: RemiIntroProps) => {
                             socialPoints = 1;
                             salesPoints = 1;
                         }
-                        if (option.id === 'ew') {
-                            socialPoints = -1;
-                            salesPoints = -1;
-                        }
                         if (option.id == 'kind') {
                             karmaPoints = 1;
                             salesPoints = 1;
@@ -97,7 +87,7 @@ const ClaimRatOne = ({ onDialogueData }: RemiIntroProps) => {
                         
                         onDialogueData({
                             type: 'completed',
-                            stage: 'ClaimRatOne',
+                            stage: 'ClaimRatTwo',
                             karma: karmaPoints,
                             social: socialPoints,
                             sales: salesPoints
@@ -139,4 +129,4 @@ const ClaimRatOne = ({ onDialogueData }: RemiIntroProps) => {
     );
 };
 
-export default ClaimRatOne;
+export default ClaimRatTwo;
