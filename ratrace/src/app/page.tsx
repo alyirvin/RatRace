@@ -20,6 +20,7 @@ import RemiMessageDeliver from './scenes/remiMessageDeliver';
 import RatKingPromotion from './scenes/ratKingPromotion';
 import BadBadEnding from './scenes/badBadEnding';
 import ExecRatMessage from './scenes/execRatMessage';
+import ScamperellaNeedsHelp from './scenes/scamperellaNeedsHelp'; 
 
 export default function Home() {
   const [day, setDay] = useState(1);
