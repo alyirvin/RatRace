@@ -14,11 +14,12 @@ import TalkAfterShadowing from './scenes/talkAfterShadowing';
 import RakeFromSnoutFarm from './scenes/rakeFromSnoutFarm';
 import RemiPartTwo from './scenes/remiPartTwo';
 // import RakeWelcomesYou from './scenes/rakeWelcomesYou';
-import Ratilda from './scenes/ratildaScene';
+import RatnoldNeedsHelp from './scenes/ratnoldNeedsHelp';
+import HelpRatnold from './scenes/helpRatnold';
 
 export default function Home() {
   const [day, setDay] = useState(1);
-  const [currentScene, setCurrentScene] = useState('remiIntro');
+  const [currentScene, setCurrentScene] = useState('declarationsQuiz');
   const [playerData, setPlayerData] = useState({
     karma: 0,
     social: 0,
@@ -43,6 +44,9 @@ export default function Home() {
 
   const handleSceneTransition = (data: any) => {
     switch (currentScene) {
+      case 'ratnoldNeedsHelp':
+        setCurrentScene('remiIntro');
+      break;
       case 'declarationsQuiz':
         setCurrentScene('remiIntro');
         break;
