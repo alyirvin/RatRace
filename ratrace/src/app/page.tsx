@@ -12,10 +12,12 @@ import KingExplainTutorial from './scenes/kingExplainTutorial';
 import ShadowRatcita from './scenes/shadowRatcita';
 import TalkAfterShadowing from './scenes/talkAfterShadowing';
 import RakeFromSnoutFarm from './scenes/rakeFromSnoutFarm';
+import RatnoldNeedsHelp from './scenes/ratnoldNeedsHelp';
+import HelpRatnold from './scenes/helpRatnold';
 
 export default function Home() {
   const [day, setDay] = useState(1);
-  const [currentScene, setCurrentScene] = useState('declarationsQuiz');
+  const [currentScene, setCurrentScene] = useState('helpRatnold');
   const [playerData, setPlayerData] = useState({
     karma: 0,
     social: 0,
@@ -40,6 +42,9 @@ export default function Home() {
 
   const handleSceneTransition = (data: any) => {
     switch (currentScene) {
+      case 'ratnoldNeedsHelp':
+        setCurrentScene('remiIntro');
+      break;
       case 'declarationsQuiz':
         setCurrentScene('remiIntro');
         break;
@@ -69,6 +74,9 @@ export default function Home() {
         break;
       case 'rakeFromSnoutFarm':
         setCurrentScene('remiIntro');
+      case 'helpRatnold':
+        setCurrentScene('remiIntro');
+      break;
       default:
         console.log('Unknown scene transition from:', currentScene);
     }
@@ -96,6 +104,10 @@ export default function Home() {
         return <RakeFromSnoutFarm onDialogueData={handleDialogueData} />
       case 'declarationsQuiz':
         return <DeclarationsQuiz onDialogueData={handleDialogueData} />;
+      case 'ratnoldNeedsHelp':
+        return <RatnoldNeedsHelp onDialogueData={handleDialogueData} />;
+      case 'helpRatnold':
+        return <HelpRatnold onDialogueData={handleDialogueData} />;
       default:
         return <div className="text-white text-center">Unknown scene: {currentScene}</div>;
     }
