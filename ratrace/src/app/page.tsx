@@ -20,15 +20,42 @@ import ClaimRatOne from './scenes/claimRatOne';
 import ClaimRatTwo from './scenes/claimRatTwo';
 import RatnoldNeedsHelp from './scenes/ratnoldNeedsHelp';
 import HelpRatnold from './scenes/helpRatnold';
+import RemiMessageDeliver from './scenes/remiMessageDeliver';
+import RatKingPromotion from './scenes/ratKingPromotion';
+import BadBadEnding from './scenes/badBadEnding';
+import ExecRatMessage from './scenes/execRatMessage';
+import ScamperellaNeedsHelp from './scenes/scamperellaNeedsHelp'; 
+import GoodBadEnding from './scenes/goodBadEnding';
+import GoodGoodEnding from './scenes/goodGoodEnding';
+import FiredEnding from './scenes/firedEnding';
+import BadGoodEnding from './scenes/badGoodEnding';
 
 export default function Home() {
   const [day, setDay] = useState(1);
-  const [currentScene, setCurrentScene] = useState('declarationsQuiz');
+  const [currentScene, setCurrentScene] = useState('ratKingPromotion');
   const [playerData, setPlayerData] = useState({
     karma: 0,
     social: 0,
     sales: 0,
   });
+
+  const determineSalesKarmaEnding = (karma: number, sales: number) => {
+    const karmaThreshold = 2;
+    const salesThreshold = 2;
+    
+    const goodKarma = karma >= karmaThreshold;
+    const goodSales = sales >= salesThreshold;
+    
+    if (goodKarma && goodSales) {
+      return 'goodGood';
+    } else if (goodKarma && !goodSales) {
+      return 'goodBad';
+    } else if (!goodKarma && goodSales) {
+      return 'badGood';
+    } else {
+      return 'badBad';
+    }
+  };
 
   const handleDialogueData = (data: any) => {
     console.log('Received data:', data);
@@ -42,6 +69,42 @@ export default function Home() {
 
       console.log('Updated player data:', playerData.karma, playerData.social, playerData.sales);
 
+      if (data?.fired) {
+        if (playerData?.sales < 2 && playerData?.karma < 2) {
+          setCurrentScene('firedEnding');
+        }
+      }
+
+      if (data.stage === 'RatKingPromotion')
+      {
+        if (!data?.fired) {
+          const salesKarmaEnding = determineSalesKarmaEnding(playerData.karma + (data.karma || 0), playerData.sales + (data.sales || 0));
+          
+          if (salesKarmaEnding === 'goodGood') {
+            setCurrentScene('goodGoodEnding');
+          } else if (salesKarmaEnding === 'goodBad') {
+            setCurrentScene('goodBadEnding');
+          } else if (salesKarmaEnding === 'badGood') {
+            setCurrentScene('badGoodEnding');
+          } else if (salesKarmaEnding === 'badBad') {
+            setCurrentScene('badBadEnding');
+          } else {
+            setCurrentScene('remiIntro'); 
+          }
+        }
+      }
+
+      if (data.stage === 'execRatMessage')
+      {
+        if (data?.fired) {
+          setCurrentScene('firedEnding');
+        }
+        else
+        {
+          setCurrentScene('remiIntro');
+        }
+      }
+
       handleSceneTransition(data);
     }
   };
@@ -50,7 +113,7 @@ export default function Home() {
     switch (currentScene) {
       case 'ratnoldNeedsHelp':
         setCurrentScene('remiIntro');
-      break;
+        break;
       case 'declarationsQuiz':
         setCurrentScene('remiIntro');
         break;
@@ -95,6 +158,29 @@ export default function Home() {
         break;
       case 'claimRatTwo':
         setCurrentScene('remiIntro');
+        break;
+      case 'helpRatnold':
+        setCurrentScene('ratnoldNeedsHelp');
+        break;
+      case 'ratnoldNeedsHelp':
+        setCurrentScene('remiIntro');
+        break;  
+      case 'remiMessageDeliver':
+        setCurrentScene('walkToDesk');
+      case 'ratKingPromotion':
+        break;
+      case 'badBadEnding':
+        break;
+      case 'firedEnding':
+        break;
+      case 'goodBadEnding':
+        break;
+      case 'goodGoodEnding':
+        break;
+      case 'badGoodEnding':
+        break;
+      case 'execRatMessage':
+        break;
       default:
         console.log('Unknown scene transition from:', currentScene);
     }
@@ -121,20 +207,29 @@ export default function Home() {
       case 'rakeFromSnoutFarm':
         return <RakeFromSnoutFarm onDialogueData={handleDialogueData} />
       case 'declarationsQuiz':
-        return <DeclarationsQuiz onDialogueData={handleDialogueData} />
-      case 'remiPartTwo':
-        return <RemiPartTwo onDialogueData={handleDialogueData} />
-      // case 'rakeWelcomesYou':
-      //   return <RakeWelcomesYou onDialogueData={handleDialogueData} />
-      // case 'ratildaScene':
-      //   return <Ratilda onDialogueData={handleDialogueData} />
-      // case 'rakeWelcomesAgain':
-      //   return <RakeWelcomesAgain onDialogueData={handleDialogueData} />
-      case 'claimRatOne':
-        return <ClaimRatOne onDialogueData={handleDialogueData} />
-      case 'claimRatTwo':
-        return <ClaimRatTwo onDialogueData={handleDialogueData} />
-      
+        return <DeclarationsQuiz onDialogueData={handleDialogueData} />;
+      case 'helpRatnold':
+        return <HelpRatnold onDialogueData={handleDialogueData} />;
+      case 'ratnoldNeedsHelp':
+        return <RatnoldNeedsHelp onDialogueData={handleDialogueData} />;
+      case 'remiMessageDeliver':
+        return <RemiMessageDeliver onDialogueData={handleDialogueData} />;
+      case 'ratKingPromotion':
+        return <RatKingPromotion onDialogueData={handleDialogueData} playerData={playerData} />;
+      case 'badBadEnding':
+        return <BadBadEnding />;
+      case 'execRatMessage':
+        return <ExecRatMessage onDialogueData={handleDialogueData} />;
+      case 'scamperellaNeedsHelp':
+        return <ScamperellaNeedsHelp onDialogueData={handleDialogueData} />;
+      case 'goodBadEnding':
+        return <GoodBadEnding />;
+      case 'goodGoodEnding':
+        return <GoodGoodEnding />;
+      case 'firedEnding':
+        return <FiredEnding />;
+      case 'badGoodEnding':
+        return <BadGoodEnding />;
       default:
         return <div className="text-white text-center">Unknown scene: {currentScene}</div>;
     }
