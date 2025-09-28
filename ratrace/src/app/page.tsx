@@ -14,6 +14,7 @@ import TalkAfterShadowing from './scenes/talkAfterShadowing';
 import RakeFromSnoutFarm from './scenes/rakeFromSnoutFarm';
 import RemiPartTwo from './scenes/remiPartTwo';
 // import RakeWelcomesYou from './scenes/rakeWelcomesYou';
+import Ratilda from './scenes/ratildaScene';
 
 export default function Home() {
   const [day, setDay] = useState(1);
@@ -73,10 +74,12 @@ export default function Home() {
         setCurrentScene('remiPartTwo');
         break;
       case 'remiPartTwo':
-        setCurrentScene('remiIntro');
-      //   break;
+        setCurrentScene('ratildaScene');
+        break;
       // case 'rakeWelcomesYou':
       //   setCurrentScene('remiIntro');
+      case 'ratildaScene':
+        setCurrentScene("remiIntro");
       default:
         console.log('Unknown scene transition from:', currentScene);
     }
@@ -108,6 +111,8 @@ export default function Home() {
         return <RemiPartTwo onDialogueData={handleDialogueData} />
       // case 'rakeWelcomesYou':
       //   return <RakeWelcomesYou onDialogueData={handleDialogueData} />
+      case 'ratildaScene':
+        return <Ratilda onDialogueData={handleDialogueData} />
       default:
         return <div className="text-white text-center">Unknown scene: {currentScene}</div>;
     }
