@@ -27,19 +27,33 @@ const RakeWelcomesYou = ({ onDialogueData }: RemiIntroProps) => {
             {
                 id: "excited",
                 text: "Yeah I can't wait!",
-                response: "That's right you are!! Let's get you over to your desk so you can start your day.",
-                nextStage: "end"
+                response: "You're ready for that Snout Farm life! Like we always say, 'Like a good rat, we're in your walls'",
+                nextStage: "what"
             },
             {
                 id: "neutral",
                 text: "A job's a job, so I guess it's okay.",
-                response: "Oh come on I'm sure at least a small part of you is excited. Let's get you over to your desk.",
-                nextStage: "end"
+                response: "Oh come on, embrace the Snout Farm life, like we always say 'Like a good rat, we're in your walls'",
+                nextStage: "what"
             },
             {
                 id: "ew",
                 text: "Ugh no! I'm only here for the money.",
-                response: "That's not a good way to look at things, try to be more positive! Come on, let's go to your desk.",
+                response: "That's not a good way to look at things, try to be more positive! Think like a Snout Farm rat, 'Like a good rat, we're in your walls'",
+                nextStage: "what"
+            }
+        ],
+        what: [
+            {
+                id: "agree",
+                text: "Yeah! I'm ready for the Snout Farm life!",
+                response: "That's the spirit! Come on, let's go get our days started.",
+                nextStage: "end"
+            },
+            {
+                id: "disagree",
+                text: "That's really our slogan?",
+                response: "Yeah, what's wrong with it? Doesn't matter, it's time to get to work.",
                 nextStage: "end"
             }
         ]
@@ -67,6 +81,10 @@ const RakeWelcomesYou = ({ onDialogueData }: RemiIntroProps) => {
                         }
                         if (option.id === 'ew') {
                             socialPoints = -1;
+                        }
+                        if (option.id == 'agree') {
+                            socialPoints = 1;
+                            karmaPoints = 1;
                         }
                         
                         onDialogueData({

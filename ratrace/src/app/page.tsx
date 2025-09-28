@@ -76,7 +76,7 @@ export default function Home() {
         setCurrentScene('remiIntro');
       //   break;
       // case 'rakeWelcomesYou':
-      //  setCurrentScene('remiIntro');
+      //   setCurrentScene('remiIntro');
       default:
         console.log('Unknown scene transition from:', currentScene);
     }

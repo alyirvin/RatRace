@@ -27,7 +27,7 @@ const RemiPartTwo = ({ onDialogueData }: RemiIntroProps) => {
             {
                 id: "helpful",
                 text: "Of Course! Getting lots done",
-                response: "I'm sure you are! Also, boss wants to see you, I think it might be good news",
+                response: "I'm sure you are! Also, boss wants to see you, I think it might be good news!!",
                 nextStage: "end"
             },
             {
