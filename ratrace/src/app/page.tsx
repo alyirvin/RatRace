@@ -13,6 +13,7 @@ import ShadowRatcita from './scenes/shadowRatcita';
 import TalkAfterShadowing from './scenes/talkAfterShadowing';
 import RakeFromSnoutFarm from './scenes/rakeFromSnoutFarm';
 import RemiPartTwo from './scenes/remiPartTwo';
+// import RakeWelcomesYou from './scenes/rakeWelcomesYou';
 
 export default function Home() {
   const [day, setDay] = useState(1);
@@ -45,7 +46,7 @@ export default function Home() {
         setCurrentScene('remiIntro');
         break;
       case 'remiIntro':
-        setCurrentScene('walkToDesk');
+        setCurrentScene('remiPartTwo');
         break;
       case 'walkToDesk':
         setCurrentScene('fetchCoffee');
@@ -73,6 +74,9 @@ export default function Home() {
         break;
       case 'remiPartTwo':
         setCurrentScene('remiIntro');
+      //   break;
+      // case 'rakeWelcomesYou':
+      //  setCurrentScene('remiIntro');
       default:
         console.log('Unknown scene transition from:', currentScene);
     }
@@ -102,6 +106,8 @@ export default function Home() {
         return <DeclarationsQuiz onDialogueData={handleDialogueData} />
       case 'remiPartTwo':
         return <RemiPartTwo onDialogueData={handleDialogueData} />
+      // case 'rakeWelcomesYou':
+      //   return <RakeWelcomesYou onDialogueData={handleDialogueData} />
       default:
         return <div className="text-white text-center">Unknown scene: {currentScene}</div>;
     }
