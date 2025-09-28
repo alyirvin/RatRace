@@ -2,8 +2,7 @@
 
 import React, { useState } from 'react';
 import SpeechBubble from '../components/speechBubble';
-import Rake from '../components/rake';
-import Office from '../images/office.png';
+import ComputerView from '../images/computer_on.png';
 import Image from 'next/image';
 
 interface DialogueOption {
@@ -17,43 +16,37 @@ interface RemiIntroProps {
     onDialogueData?: (data: any) => void;
 }
 
-const RakeWelcomesYou = ({ onDialogueData }: RemiIntroProps) => {
-    const [currentDialogue, setCurrentDialogue] = useState("Hey welcome back!! Aren't you excited for your first day as a full time employee? And in the customer service department, isn't that great?");
+const ClaimRatTwo = ({ onDialogueData }: RemiIntroProps) => {
+    const [currentDialogue, setCurrentDialogue] = useState("*On the phone* Help me!! Please someone help meeeee");
     const [showOptions, setShowOptions] = useState(true);
     const [dialogueStage, setDialogueStage] = useState("initial");
     
     const allDialogueOptions: Record<string, DialogueOption[]> = {
         initial: [
             {
-                id: "excited",
-                text: "Yeah I can't wait!",
-                response: "You're ready for that Snout Farm life! Like we always say, 'Like a good rat, we're in your walls'",
-                nextStage: "what"
+                id: "helpful",
+                text: "What is the problem?",
+                response: "I've been traumatized! This cat almost killed me!! Thankfully they barely left a scratch, but I need therapy now. Will you cover it?",
+                nextStage: "solutions"
             },
-            {
-                id: "neutral",
-                text: "A job's a job, so I guess it's okay.",
-                response: "Oh come on, embrace the Snout Farm life, like we always say 'Like a good rat, we're in your walls'",
-                nextStage: "what"
-            },
-            {
-                id: "ew",
-                text: "Ugh no! I'm only here for the money.",
-                response: "That's not a good way to look at things, try to be more positive! Think like a Snout Farm rat, 'Like a good rat, we're in your walls'",
-                nextStage: "what"
-            }
         ],
-        what: [
+        solutions: [
             {
-                id: "agree",
-                text: "Yeah! I'm ready for the Snout Farm life!",
-                response: "That's the spirit! Come on, let's go get our days started.",
+                id: "kind",
+                text: "Oh that's just terrible! Since this is all mental and emotional based, I'm not 100% sure if your insurance will cover it. Let us check your policy details together.",
+                response: "Thank you thank you thank you!!",
                 nextStage: "end"
             },
             {
-                id: "disagree",
-                text: "That's really our slogan?",
-                response: "Yeah, what's wrong with it? Doesn't matter, it's time to get to work.",
+                id: "bad",
+                text: "No why would that be covered under your plan? We're here to fix bigger problems.",
+                response: "Fine! Maybe I'll just go find a better insurance company then.",
+                nextStage: "end"
+            },
+            {
+                id: "neutral",
+                text: "Are you sure you need therapy? Maybe you're just still feeling the initial shock and need to lie down.",
+                response: "Do not tell me to lie down! I know what I experienced and I need compensation for it now!",
                 nextStage: "end"
             }
         ]
@@ -76,20 +69,25 @@ const RakeWelcomesYou = ({ onDialogueData }: RemiIntroProps) => {
                         let socialPoints = 0;
                         let salesPoints = 0;
                         
-                        if (option.id === 'excited') {
+                        if (option.id === 'helpful') {
                             socialPoints = 1;
+                            salesPoints = 1;
                         }
-                        if (option.id === 'ew') {
+                        if (option.id == 'kind') {
+                            karmaPoints = 1;
+                            salesPoints = 1;
+                        }
+                        if (option.id == 'neutral') {
+                            karmaPoints = -1;
                             socialPoints = -1;
                         }
-                        if (option.id == 'agree') {
-                            socialPoints = 1;
-                            karmaPoints = 1;
+                        if (option.id == "bad") {
+                            karmaPoints = -1;
                         }
                         
                         onDialogueData({
                             type: 'completed',
-                            stage: 'rakeWelcomesYou',
+                            stage: 'ClaimRatTwo',
                             karma: karmaPoints,
                             social: socialPoints,
                             sales: salesPoints
@@ -106,8 +104,8 @@ const RakeWelcomesYou = ({ onDialogueData }: RemiIntroProps) => {
 
     return (
         <div className="w-full h-full relative">
-            <div className="absolute top-[25%] right-[62%]">
-                <SpeechBubble orientation="right" message={currentDialogue}/>
+            <div className="z-2 absolute top-[25%] left-[3%]">
+                <SpeechBubble orientation="left" message={currentDialogue}/>
             </div>
             
             {showOptions && (
@@ -123,15 +121,12 @@ const RakeWelcomesYou = ({ onDialogueData }: RemiIntroProps) => {
                     ))}
                 </div>
             )}
-            
+
             <div className="w-[100vw] h-[100vw]">
-                <div className="absolute z-1 top-[-175] left-[50%] translate-x-[-50%] scale-[0.5]">
-                    <Rake />
-                </div>
-                <Image src={Office} alt="Office Background" className="absolute -z-1 bottom-40 right-64 scale-[1.5]"/>
+                <Image src={ComputerView} alt="Computer View" className="" />
             </div>
         </div>
     );
 };
 
-export default RakeWelcomesYou;
+export default ClaimRatTwo;

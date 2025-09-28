@@ -17,8 +17,8 @@ interface RemiIntroProps {
     onDialogueData?: (data: any) => void;
 }
 
-const RakeWelcomesYou = ({ onDialogueData }: RemiIntroProps) => {
-    const [currentDialogue, setCurrentDialogue] = useState("Hey welcome back!! Aren't you excited for your first day as a full time employee? And in the customer service department, isn't that great?");
+const RakeWelcomesAgain = ({ onDialogueData }: RemiIntroProps) => {
+    const [currentDialogue, setCurrentDialogue] = useState("Hey!! I heard you got a promotion as an insurance agent! That's fantastic, congrats!");
     const [showOptions, setShowOptions] = useState(true);
     const [dialogueStage, setDialogueStage] = useState("initial");
     
@@ -26,34 +26,34 @@ const RakeWelcomesYou = ({ onDialogueData }: RemiIntroProps) => {
         initial: [
             {
                 id: "excited",
-                text: "Yeah I can't wait!",
-                response: "You're ready for that Snout Farm life! Like we always say, 'Like a good rat, we're in your walls'",
-                nextStage: "what"
+                text: "I did! I'm so happy this is all I've ever dreamed of!",
+                response: "You should be proud! Not everyone gets to be one of the top rats in the wall. I'm curious, why do you want this position so bad?",
+                nextStage: "jobReason"
             },
             {
                 id: "neutral",
-                text: "A job's a job, so I guess it's okay.",
-                response: "Oh come on, embrace the Snout Farm life, like we always say 'Like a good rat, we're in your walls'",
-                nextStage: "what"
+                text: "Yay more responsibilities...",
+                response: "Aren't you happy? Why do you stay here if you don't seem to enjoy it?",
+                nextStage: "jobReason"
             },
-            {
-                id: "ew",
-                text: "Ugh no! I'm only here for the money.",
-                response: "That's not a good way to look at things, try to be more positive! Think like a Snout Farm rat, 'Like a good rat, we're in your walls'",
-                nextStage: "what"
-            }
         ],
-        what: [
+        jobReason: [
             {
-                id: "agree",
-                text: "Yeah! I'm ready for the Snout Farm life!",
-                response: "That's the spirit! Come on, let's go get our days started.",
+                id: "money",
+                text: "Money",
+                response: "I see, that's kinda understandable, we all have to eat somehow.",
                 nextStage: "end"
             },
             {
-                id: "disagree",
-                text: "That's really our slogan?",
-                response: "Yeah, what's wrong with it? Doesn't matter, it's time to get to work.",
+                id: "goodness",
+                text: "To help others",
+                response: "Exactly! Seeing the change we make everyday makes it all worth it!",
+                nextStage: "end"
+            },
+            {
+                id: "power",
+                text: "Power",
+                response: "Well that's interesting **and not at all concerning**",
                 nextStage: "end"
             }
         ]
@@ -76,20 +76,26 @@ const RakeWelcomesYou = ({ onDialogueData }: RemiIntroProps) => {
                         let socialPoints = 0;
                         let salesPoints = 0;
                         
-                        if (option.id === 'excited') {
-                            socialPoints = 1;
+                        if (option.id === 'money') {
+                            karmaPoints = -1;
                         }
-                        if (option.id === 'ew') {
-                            socialPoints = -1;
-                        }
-                        if (option.id == 'agree') {
-                            socialPoints = 1;
+                        if (option.id === 'goodness') {
                             karmaPoints = 1;
+                        }
+                        if (option.id == 'power') {
+                            karmaPoints = -2;
+                        }
+                        if (option.id == 'excited') {
+                            salesPoints = 1;
+                            socialPoints = 1;
+                        }
+                        if (option.id == 'neutral') {
+                            salesPoints = -1;
                         }
                         
                         onDialogueData({
                             type: 'completed',
-                            stage: 'rakeWelcomesYou',
+                            stage: 'rakeWelcomesAgain',
                             karma: karmaPoints,
                             social: socialPoints,
                             sales: salesPoints
@@ -134,4 +140,4 @@ const RakeWelcomesYou = ({ onDialogueData }: RemiIntroProps) => {
     );
 };
 
-export default RakeWelcomesYou;
+export default RakeWelcomesAgain;

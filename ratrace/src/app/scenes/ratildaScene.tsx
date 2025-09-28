@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import SpeechBubble from '../components/speechBubble';
-import Rake from '../components/rake';
+import RatildaImage from '../components/ratilda';
 import Office from '../images/office.png';
 import Image from 'next/image';
 
@@ -17,43 +17,53 @@ interface RemiIntroProps {
     onDialogueData?: (data: any) => void;
 }
 
-const RakeWelcomesYou = ({ onDialogueData }: RemiIntroProps) => {
-    const [currentDialogue, setCurrentDialogue] = useState("Hey welcome back!! Aren't you excited for your first day as a full time employee? And in the customer service department, isn't that great?");
+const Ratilda = ({ onDialogueData }: RemiIntroProps) => {
+    const [currentDialogue, setCurrentDialogue] = useState("psst... pssssstt... over here");
     const [showOptions, setShowOptions] = useState(true);
     const [dialogueStage, setDialogueStage] = useState("initial");
     
     const allDialogueOptions: Record<string, DialogueOption[]> = {
         initial: [
             {
-                id: "excited",
-                text: "Yeah I can't wait!",
-                response: "You're ready for that Snout Farm life! Like we always say, 'Like a good rat, we're in your walls'",
-                nextStage: "what"
+                id: "response",
+                text: "Yes?",
+                response: "Oh good you heard me. Hey, the name's Ratilda, Ratilda Wormwood. I need you to do me a HUGE favor, alright?",
+                nextStage: "helpOffer"
             },
             {
-                id: "neutral",
-                text: "A job's a job, so I guess it's okay.",
-                response: "Oh come on, embrace the Snout Farm life, like we always say 'Like a good rat, we're in your walls'",
-                nextStage: "what"
-            },
-            {
-                id: "ew",
-                text: "Ugh no! I'm only here for the money.",
-                response: "That's not a good way to look at things, try to be more positive! Think like a Snout Farm rat, 'Like a good rat, we're in your walls'",
-                nextStage: "what"
+                id: "ignore",
+                text: "*Ignore the Voice*",
+                response: "I know you can hear me over there, stop ignoring me! I need help!",
+                nextStage: "helpOffer"
             }
         ],
-        what: [
+        helpOffer: [
             {
-                id: "agree",
-                text: "Yeah! I'm ready for the Snout Farm life!",
-                response: "That's the spirit! Come on, let's go get our days started.",
-                nextStage: "end"
+                id: "helpOut",
+                text: "What do you need me to do?",
+                response: "Great you're on board! You see, I was given sooo much work this week and I just don't have any time to finish it. Do you think maybe you could help a girl out and take some of it?",
+                nextStage: "answer"
+            }
+        ],
+        answer: [
+            {
+                id: "yes",
+                text: "I mean, I guess I don't have too much work of my own to do, I might be able to take a small amount off of you.",
+                response: "Perfect! I just have three presentations that need to be finished by Friday as well as a written report that's due tomorrow. That's not too bad for you.",
+                nextStage: "finalMessage"
             },
             {
-                id: "disagree",
-                text: "That's really our slogan?",
-                response: "Yeah, what's wrong with it? Doesn't matter, it's time to get to work.",
+                id: "no",
+                text: "I'm not going to do that, you should've been able to manage your time better.",
+                response: "But... but... ugh fine! I don't need your help!",
+                nextStage: "end"
+            }
+        ],
+        finalMessage: [
+            {
+                id:"confused",
+                text: "Wait what?",
+                response: "Byee thank you so much work bestie!",
                 nextStage: "end"
             }
         ]
@@ -76,20 +86,25 @@ const RakeWelcomesYou = ({ onDialogueData }: RemiIntroProps) => {
                         let socialPoints = 0;
                         let salesPoints = 0;
                         
-                        if (option.id === 'excited') {
+                        if (option.id === 'yes') {
                             socialPoints = 1;
+                            karmaPoints = -1;
                         }
-                        if (option.id === 'ew') {
+                        if (option.id === 'no') {
                             socialPoints = -1;
-                        }
-                        if (option.id == 'agree') {
-                            socialPoints = 1;
                             karmaPoints = 1;
                         }
+                        if (option.id === 'response') {
+                            socialPoints = 1; 
+                        }
+                        if (option.id === 'ignore') {
+                            socialPoints = - 1;
+                        }
+
                         
                         onDialogueData({
                             type: 'completed',
-                            stage: 'rakeWelcomesYou',
+                            stage: 'Ratcita',
                             karma: karmaPoints,
                             social: socialPoints,
                             sales: salesPoints
@@ -125,8 +140,8 @@ const RakeWelcomesYou = ({ onDialogueData }: RemiIntroProps) => {
             )}
             
             <div className="w-[100vw] h-[100vw]">
-                <div className="absolute z-1 top-[-175] left-[50%] translate-x-[-50%] scale-[0.5]">
-                    <Rake />
+                <div className="absolute z-1 top-[-150] left-[50%] translate-x-[-50%] scale-[0.5]">
+                    <RatildaImage />
                 </div>
                 <Image src={Office} alt="Office Background" className="absolute -z-1 bottom-40 right-64 scale-[1.5]"/>
             </div>
@@ -134,4 +149,4 @@ const RakeWelcomesYou = ({ onDialogueData }: RemiIntroProps) => {
     );
 };
 
-export default RakeWelcomesYou;
+export default Ratilda;
