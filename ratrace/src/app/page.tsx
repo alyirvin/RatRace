@@ -13,9 +13,9 @@ import ShadowRatcita from './scenes/shadowRatcita';
 import TalkAfterShadowing from './scenes/talkAfterShadowing';
 import RakeFromSnoutFarm from './scenes/rakeFromSnoutFarm';
 import RemiPartTwo from './scenes/remiPartTwo';
-// import RakeWelcomesYou from './scenes/rakeWelcomesYou';
-// import Ratilda from './scenes/ratildaScene';
-// import RakeWelcomesAgain from './scenes/rakeWelcomesAgain';
+import RakeWelcomesYou from './scenes/rakeWelcomesYou';
+import Ratilda from './scenes/ratildaScene';
+import RakeWelcomesAgain from './scenes/rakeWelcomesAgain';
 import ClaimRatOne from './scenes/claimRatOne';
 import ClaimRatTwo from './scenes/claimRatTwo';
 import RatnoldNeedsHelp from './scenes/ratnoldNeedsHelp';
@@ -29,6 +29,11 @@ import GoodBadEnding from './scenes/goodBadEnding';
 import GoodGoodEnding from './scenes/goodGoodEnding';
 import FiredEnding from './scenes/firedEnding';
 import BadGoodEnding from './scenes/badGoodEnding';
+import FinalPromotion from './scenes/finalPromotion';
+import CustomerService1 from './scenes/customerService1';
+import CustomerService2 from './scenes/customerService2';
+import CustomerService3 from './scenes/customerService3';
+import ReturnToKing from './scenes/returnToKing';
 
 export default function Home() {
   const [day, setDay] = useState(1);
@@ -101,7 +106,7 @@ export default function Home() {
         }
         else
         {
-          setCurrentScene('remiIntro');
+          setCurrentScene('finalPromotion');
         }
       }
 
@@ -138,9 +143,6 @@ export default function Home() {
       case 'rakeFromSnoutFarm':
         setCurrentScene('declarationsQuiz');
         break;
-      case 'declarationsQuiz':
-        setCurrentScene('ratnoldNeedsHelp');
-        break;
       case 'ratnoldNeedsHelp':
         setCurrentScene('remiIntro');
         break;
@@ -163,12 +165,34 @@ export default function Home() {
         setCurrentScene('customerService2');
         break;
       case 'customerService2':
+        setCurrentScene('ratildaScene');
+        break;
+      case 'ratildaScene':
         setCurrentScene('customerService3');
         break;
-      
+      case 'customerService3':
+        setCurrentScene('remiMessageDeliver');
+        break;
       case 'remiMessageDeliver':
-        setCurrentScene('walkToDesk');
+        setCurrentScene('ratKingPromotion');
+        break;
       case 'ratKingPromotion':
+        break;
+      case 'rakeWelcomesAgain':
+        setCurrentScene('claimRatOne');
+        break;
+      case 'claimRatOne':
+        setCurrentScene('scamperellaNeedsHelp');
+        break;
+      case 'scamperellaNeedsHelp':
+        setCurrentScene('claimRatTwo');
+        break;
+      case 'claimRatTwo':
+        setCurrentScene('execRatMessage');
+        break;
+      case 'execRatMessage':
+        break;
+      case 'finalPromotion':
         break;
       case 'badBadEnding':
         break;
@@ -179,8 +203,6 @@ export default function Home() {
       case 'goodGoodEnding':
         break;
       case 'badGoodEnding':
-        break;
-      case 'execRatMessage':
         break;
       default:
         console.log('Unknown scene transition from:', currentScene);
@@ -231,6 +253,28 @@ export default function Home() {
         return <FiredEnding />;
       case 'badGoodEnding':
         return <BadGoodEnding />;
+      case 'rakeWelcomesAgain':
+        return <RakeWelcomesAgain onDialogueData={handleDialogueData} />;
+      case 'claimRatOne':
+        return <ClaimRatOne onDialogueData={handleDialogueData} />;
+      case 'claimRatTwo':
+        return <ClaimRatTwo onDialogueData={handleDialogueData} />;
+      case 'finalPromotion':
+        return <FinalPromotion onDialogueData={handleDialogueData} playerData={playerData} />;
+      case 'customerService1':
+        return <CustomerService1 onDialogueData={handleDialogueData} />;
+      case 'customerService2':
+        return <CustomerService2 onDialogueData={handleDialogueData} />;
+      case 'customerService3': 
+        return <CustomerService3 onDialogueData={handleDialogueData} />;
+      case 'remiPartTwo':
+        return <RemiPartTwo onDialogueData={handleDialogueData} />;
+      case 'returnToKing':
+        return <ReturnToKing onDialogueData={handleDialogueData} />;
+      case 'rakeWelcomesYou':
+        return <RakeWelcomesYou onDialogueData={handleDialogueData} />;
+      case 'ratildaScene':
+        return <Ratilda onDialogueData={handleDialogueData} />;
       default:
         return <div className="text-white text-center">Unknown scene: {currentScene}</div>;
     }
