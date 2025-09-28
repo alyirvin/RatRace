@@ -16,10 +16,14 @@ import RemiPartTwo from './scenes/remiPartTwo';
 // import RakeWelcomesYou from './scenes/rakeWelcomesYou';
 import RatnoldNeedsHelp from './scenes/ratnoldNeedsHelp';
 import HelpRatnold from './scenes/helpRatnold';
+import RemiMessageDeliver from './scenes/remiMessageDeliver';
+import RatKingPromotion from './scenes/ratKingPromotion';
+import BadBadEnding from './scenes/badBadEnding';
+import ExecRatMessage from './scenes/execRatMessage';
 
 export default function Home() {
   const [day, setDay] = useState(1);
-  const [currentScene, setCurrentScene] = useState('declarationsQuiz');
+  const [currentScene, setCurrentScene] = useState('ratKingPromotion');
   const [playerData, setPlayerData] = useState({
     karma: 0,
     social: 0,
@@ -38,6 +42,30 @@ export default function Home() {
 
       console.log('Updated player data:', playerData.karma, playerData.social, playerData.sales);
 
+      if (data?.fired) {
+        if (playerData?.sales < 2 && playerData?.karma < 2) {
+          setCurrentScene('badBadEnding');
+        }
+      }
+
+      if (data.stage === 'RatKingPromotion')
+      {
+        if (!data?.fired) {
+          setCurrentScene('remiIntro');
+        }
+      }
+
+      if (data.stage === 'execRatMessage')
+      {
+        if (data?.fired) {
+          setCurrentScene('badBadEnding');
+        }
+        else
+        {
+          setCurrentScene('remiIntro');
+        }
+      }
+
       handleSceneTransition(data);
     }
   };
@@ -46,7 +74,7 @@ export default function Home() {
     switch (currentScene) {
       case 'ratnoldNeedsHelp':
         setCurrentScene('remiIntro');
-      break;
+        break;
       case 'declarationsQuiz':
         setCurrentScene('remiIntro');
         break;
@@ -79,6 +107,21 @@ export default function Home() {
         break;
       case 'remiPartTwo':
         setCurrentScene('remiIntro');
+        break;
+      case 'helpRatnold':
+        setCurrentScene('ratnoldNeedsHelp');
+        break;
+      case 'ratnoldNeedsHelp':
+        setCurrentScene('remiIntro');
+        break;  
+      case 'remiMessageDeliver':
+        setCurrentScene('walkToDesk');
+      case 'ratKingPromotion':
+        break;
+      case 'badBadEnding':
+        break;
+      case 'execRatMessage':
+        break;
       default:
         console.log('Unknown scene transition from:', currentScene);
     }
@@ -106,6 +149,18 @@ export default function Home() {
         return <RakeFromSnoutFarm onDialogueData={handleDialogueData} />
       case 'declarationsQuiz':
         return <DeclarationsQuiz onDialogueData={handleDialogueData} />;
+      case 'helpRatnold':
+        return <HelpRatnold onDialogueData={handleDialogueData} />;
+      case 'ratnoldNeedsHelp':
+        return <RatnoldNeedsHelp onDialogueData={handleDialogueData} />;
+      case 'remiMessageDeliver':
+        return <RemiMessageDeliver onDialogueData={handleDialogueData} />;
+      case 'ratKingPromotion':
+        return <RatKingPromotion onDialogueData={handleDialogueData} playerData={playerData} />;
+      case 'badBadEnding':
+        return <BadBadEnding />;
+      case 'execRatMessage':
+        return <ExecRatMessage onDialogueData={handleDialogueData} />;
       default:
         return <div className="text-white text-center">Unknown scene: {currentScene}</div>;
     }

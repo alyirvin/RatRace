@@ -4,7 +4,9 @@ import React, { useState } from 'react';
 import SpeechBubble from '../components/speechBubble';
 import ComputerView from '../images/computer_on.png';
 import Image from 'next/image';
-// import leftEar fro
+import monkeyMouse from '../images/Monkey.png';
+import leftEar from '../images/Monkey Left ear.png';    
+import rightEar from '../images/Monkey right.png';
 
 interface DialogueOption {
     id: string;
@@ -18,7 +20,7 @@ interface RemiIntroProps {
 }
 
 const HelpRatnold = ({ onDialogueData }: RemiIntroProps) => {
-    const [currentDialogue, setCurrentDialogue] = useState(`Alright let's get into it! Whose name is on the statement again?`);
+    const [currentDialogue, setCurrentDialogue] = useState(`Alright let's get into it! You can use my computer and monkey to view the declaration. Just press the ears to change pages. So first, whose name is on the statement again?`);
     const [showOptions, setShowOptions] = useState(true);
     const [dialogueStage, setDialogueStage] = useState("initial");
     
@@ -154,7 +156,7 @@ const HelpRatnold = ({ onDialogueData }: RemiIntroProps) => {
     };
 
     const [currentPage, setCurrentPage] = useState(1);
-    const totalPages = 3;
+    const totalPages = 4;
 
     return (
         <div className="w-full h-full relative">
@@ -178,33 +180,33 @@ const HelpRatnold = ({ onDialogueData }: RemiIntroProps) => {
 
             <div className="z-0 w-[100vw] h-[100vh] flex justify-center items-center absolute -bottom-40 right-0 ">
                 <div className="z-1">
-                    <div className="w-full h-full absolute bottom-54 left-10">
-                        <Image
-                            src={`/ratopia_declarations-${currentPage}.png`}
-                            alt={`Insurance Declaration Form - Page ${currentPage}`}
-                            fill
-                            className="object-contain scale-[0.7] pb-40 w-full h-full"
-                        />
+                    <div className="w-full h-full absolute bottom-29 left-130">
+                        <div className="relative w-[600px] h-[380px]">
+                            <Image
+                                src={`/ratopia_declarations-${currentPage}.png`}
+                                alt={`Insurance Declaration Form - Page ${currentPage}`}
+                                fill
+                                className=""
+                            />
+                        </div>
                     </div>
-                        
-                    <div className="absolute -bottom-1 left-2 text-black px-2 py-1 rounded text-xs">
-                        <div className="mt-4 flex justify-between">
+
+                    <div className="absolute bottom-40 right-70 px-2 scale-[1.2]">
+                        <div className="relative w-auto h-auto">
+                            <Image src={monkeyMouse} alt="Monkey Mouse" className="w-50 h-50 object-contain"/>
                             <button
                                 onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                                 disabled={currentPage === 1}
-                                className="px-3 py-1 bg-gray-500 text-white rounded disabled:bg-gray-300 disabled:cursor-not-allowed mr-2"
+                                className="absolute top-[-55] left-[5] disabled:cursor-not-allowed scale-[0.15]"
                                 >
-                                {/* <Image */}
+                                <Image src={leftEar} alt="Left Ear" className="object-contain"/>
                             </button>
-                            <span className="text-sm self-center">
-                                {currentPage}/{totalPages}
-                            </span>
                             <button
                                 onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                                 disabled={currentPage === totalPages}
-                                className="ml-2 px-3 py-1 bg-gray-500 text-white rounded disabled:bg-gray-300 disabled:cursor-not-allowed"
+                                className="absolute top-[-55] right-[3] disabled:cursor-not-allowed scale-[0.15]"
                                 >
-                            Next →
+                                <Image src={rightEar} alt="Right Ear" className="object-contain"/>
                             </button>
                         </div>
                     </div>

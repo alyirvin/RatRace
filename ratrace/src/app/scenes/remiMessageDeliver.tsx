@@ -2,10 +2,9 @@
 
 import React, { useState } from 'react';
 import SpeechBubble from '../components/speechBubble';
-import RatKing from '../components/ratKing';
-import RatKingOffice from '../images/Less tall Rat King room.png';
+import Remi from '../components/remi';
+import Office from '../images/office.png';
 import Image from 'next/image';
-
 
 interface DialogueOption {
     id: string;
@@ -18,8 +17,8 @@ interface RemiIntroProps {
     onDialogueData?: (data: any) => void;
 }
 
-const FirstRatKingMeeting = ({ onDialogueData }: RemiIntroProps) => {
-    const [currentDialogue, setCurrentDialogue] = useState("What are you doing in MY office intern? Don't you know I'm busy!");
+const RemiMessageDeliver = ({ onDialogueData }: RemiIntroProps) => {
+    const [currentDialogue, setCurrentDialogue] = useState("Hey! There you are! How's it been in the world of customer service?");
     const [showOptions, setShowOptions] = useState(true);
     const [dialogueStage, setDialogueStage] = useState("initial");
     
@@ -27,20 +26,20 @@ const FirstRatKingMeeting = ({ onDialogueData }: RemiIntroProps) => {
         initial: [
             {
                 id: "helpful",
-                text: "Good morning, sir! Brought your coffee just the way you like it.",
-                response: "Hmm. Polite. Efficient. Acceptable.",
+                text: "It's been great, I'm learning a lot!",
+                response: "Awesome! I just wanted to let you know that King Rat wants to see you in his office ASAP. Good luck!",
                 nextStage: "end"
             },
             {
                 id: "nervous", 
-                text: "Here’s your coffee. I had more important things to do, but whatever.",
-                response: "Well. Remind me never to rely on you for anything mission-critical.",
+                text: "It's okay, I guess. A bit stressful though.",
+                response: "I understand, but you're doing great! By the way, King Rat wants to see you in his office ASAP. Good luck!",
                 nextStage: "end"
             },
             {
                 id: "ew",
-                text: "*Throw the coffee at king rat*",
-                response: "RAAAAAAAAHHHHHHHHHHHHH",
+                text: "It sucks. I hate this job.",
+                response: "Well, that's unfortunate. Just so you know, King Rat wants to see you in his office ASAP. Good luck... I guess.",
                 nextStage: "end"
             },
         ]
@@ -65,23 +64,20 @@ const FirstRatKingMeeting = ({ onDialogueData }: RemiIntroProps) => {
                         
                         if (option.id === 'helpful') {
                             socialPoints = 1;
-                            salesPoints = 1;
-                        }
-                        if (option.id === 'nervous') {
-                            socialPoints = -1;
                         }
                         if (option.id === 'ew') {
-                            salesPoints = -2;
                             socialPoints = -1;
+                        }
+                        if (option.id === 'nervous') {
+                            socialPoints = 0; 
                         }
                         
                         onDialogueData({
                             type: 'completed',
-                            stage: 'FirstRatKingMeeting',
+                            stage: 'RemiMessageDeliver',
                             karma: karmaPoints,
                             social: socialPoints,
-                            sales: salesPoints,
-                            fired: option.id === 'ew' ? true : false
+                            sales: salesPoints
                         });
                     }
                 } else {
@@ -95,12 +91,12 @@ const FirstRatKingMeeting = ({ onDialogueData }: RemiIntroProps) => {
 
     return (
         <div className="w-full h-full relative">
-            <div className="absolute top-[25%] left-[7%] z-10">
+            <div className="absolute top-[25%] right-[62%]">
                 <SpeechBubble orientation="right" message={currentDialogue}/>
             </div>
             
             {showOptions && (
-                <div className="absolute bottom-[10%] left-1/2 transform -translate-x-1/2 w-[60%] max-w-[500px] flex flex-col gap-3 z-10">
+                <div className="z-2 absolute bottom-[10%] left-1/2 transform -translate-x-1/2 w-[60%] max-w-[500px] flex flex-col gap-3 z-10">
                     {getCurrentOptions().map((option: DialogueOption) => (
                         <button
                             key={option.id}
@@ -113,12 +109,14 @@ const FirstRatKingMeeting = ({ onDialogueData }: RemiIntroProps) => {
                 </div>
             )}
             
-            
-            <div className="z-0 w-[100vw] h-[100vh] flex justify-center items-center absolute bottom-20 right-0 ">
-                <Image src={RatKingOffice} alt="Rat King Office" className="" />
+            <div className="w-[100vw] h-[100vw]">
+                <div className="absolute z-1 top-[-150] left-[50%] translate-x-[-50%] scale-[0.5]">
+                    <Remi />
+                </div>
+                <Image src={Office} alt="Office Background" className="absolute -z-1 bottom-40 right-64 scale-[1.5]"/>
             </div>
         </div>
     );
 };
 
-export default FirstRatKingMeeting;
+export default RemiMessageDeliver;
