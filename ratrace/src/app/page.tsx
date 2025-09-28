@@ -107,14 +107,8 @@ export default function Home() {
 
   const handleSceneTransition = (data: any) => {
     switch (currentScene) {
-      case 'ratnoldNeedsHelp':
-        setCurrentScene('remiIntro');
-        break;
-      case 'declarationsQuiz':
-        setCurrentScene('remiIntro');
-        break;
       case 'remiIntro':
-        setCurrentScene('remiPartTwo');
+        setCurrentScene('walkToDesk');
         break;
       case 'walkToDesk':
         setCurrentScene('fetchCoffee');
@@ -138,17 +132,36 @@ export default function Home() {
         setCurrentScene('rakeFromSnoutFarm');
         break;
       case 'rakeFromSnoutFarm':
-        setCurrentScene('remiPartTwo');
+        setCurrentScene('declarationsQuiz');
         break;
-      case 'remiPartTwo':
-        setCurrentScene('remiIntro');
-        break;
-      case 'helpRatnold':
+      case 'declarationsQuiz':
         setCurrentScene('ratnoldNeedsHelp');
         break;
       case 'ratnoldNeedsHelp':
         setCurrentScene('remiIntro');
+        break;
+      case 'helpRatnold':
+        setCurrentScene('declarationsQuiz');
+        break;
+      case 'declarationsQuiz':
+        setCurrentScene('remiPartTwo');
+        break;
+      case 'remiPartTwo':
+        setCurrentScene('returnToKing');
+        break;
+      case 'returnToKing':
+        setCurrentScene('rakeWelcomesYou');
         break;  
+      case 'rakeWelcomesYou':
+        setCurrentScene('customerService3');
+        break;
+      case 'customerService1':
+        setCurrentScene('customerService2');
+        break;
+      case 'customerService2':
+        setCurrentScene('customerService3');
+        break;
+      
       case 'remiMessageDeliver':
         setCurrentScene('walkToDesk');
       case 'ratKingPromotion':
