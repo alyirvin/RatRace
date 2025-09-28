@@ -12,6 +12,7 @@ import KingExplainTutorial from './scenes/kingExplainTutorial';
 import ShadowRatcita from './scenes/shadowRatcita';
 import TalkAfterShadowing from './scenes/talkAfterShadowing';
 import RakeFromSnoutFarm from './scenes/rakeFromSnoutFarm';
+import RemiPartTwo from './scenes/remiPartTwo';
 
 export default function Home() {
   const [day, setDay] = useState(1);
@@ -68,6 +69,9 @@ export default function Home() {
         setCurrentScene('rakeFromSnoutFarm');
         break;
       case 'rakeFromSnoutFarm':
+        setCurrentScene('remiPartTwo');
+        break;
+      case 'remiPartTwo':
         setCurrentScene('remiIntro');
       default:
         console.log('Unknown scene transition from:', currentScene);
@@ -96,6 +100,8 @@ export default function Home() {
         return <RakeFromSnoutFarm onDialogueData={handleDialogueData} />
       case 'declarationsQuiz':
         return <DeclarationsQuiz onDialogueData={handleDialogueData} />
+      case 'remiPartTwo':
+        return <RemiPartTwo onDialogueData={handleDialogueData} />
       default:
         return <div className="text-white text-center">Unknown scene: {currentScene}</div>;
     }
