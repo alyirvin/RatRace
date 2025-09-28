@@ -12,12 +12,14 @@ import KingExplainTutorial from './scenes/kingExplainTutorial';
 import ShadowRatcita from './scenes/shadowRatcita';
 import TalkAfterShadowing from './scenes/talkAfterShadowing';
 import RakeFromSnoutFarm from './scenes/rakeFromSnoutFarm';
+import RemiPartTwo from './scenes/remiPartTwo';
+// import RakeWelcomesYou from './scenes/rakeWelcomesYou';
 import RatnoldNeedsHelp from './scenes/ratnoldNeedsHelp';
 import HelpRatnold from './scenes/helpRatnold';
 
 export default function Home() {
   const [day, setDay] = useState(1);
-  const [currentScene, setCurrentScene] = useState('helpRatnold');
+  const [currentScene, setCurrentScene] = useState('declarationsQuiz');
   const [playerData, setPlayerData] = useState({
     karma: 0,
     social: 0,
@@ -49,7 +51,7 @@ export default function Home() {
         setCurrentScene('remiIntro');
         break;
       case 'remiIntro':
-        setCurrentScene('walkToDesk');
+        setCurrentScene('remiPartTwo');
         break;
       case 'walkToDesk':
         setCurrentScene('fetchCoffee');
@@ -73,10 +75,10 @@ export default function Home() {
         setCurrentScene('rakeFromSnoutFarm');
         break;
       case 'rakeFromSnoutFarm':
+        setCurrentScene('remiPartTwo');
+        break;
+      case 'remiPartTwo':
         setCurrentScene('remiIntro');
-      case 'helpRatnold':
-        setCurrentScene('remiIntro');
-      break;
       default:
         console.log('Unknown scene transition from:', currentScene);
     }
@@ -104,10 +106,6 @@ export default function Home() {
         return <RakeFromSnoutFarm onDialogueData={handleDialogueData} />
       case 'declarationsQuiz':
         return <DeclarationsQuiz onDialogueData={handleDialogueData} />;
-      case 'ratnoldNeedsHelp':
-        return <RatnoldNeedsHelp onDialogueData={handleDialogueData} />;
-      case 'helpRatnold':
-        return <HelpRatnold onDialogueData={handleDialogueData} />;
       default:
         return <div className="text-white text-center">Unknown scene: {currentScene}</div>;
     }
