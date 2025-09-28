@@ -27,7 +27,7 @@ const IntroCutScene = ({ onDialogueData }: IntroCutSceneProps) => {
 
     return (
         <div className="w-full h-full relative bg-[#B2F2EE]">
-            <Image src={cutScene} alt="Intro Cut Scene" className="absolute z-1 bottom-60 right-114 scale-[3]"/>
+            <Image src={cutScene} alt="Intro Cut Scene" className="absolute z-1 bottom-60 right-138 scale-[3.7]"/>
         </div>
     );
 };

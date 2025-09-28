@@ -35,6 +35,7 @@ import CustomerService2 from './scenes/customerService2';
 import CustomerService3 from './scenes/customerService3';
 import ReturnToKing from './scenes/returnToKing';
 import IntroCutScene from './scenes/introCutScene';
+import PlayScreen from './scenes/playScreen';
 
 export default function Home() {
   const [day, setDay] = useState(1);
@@ -118,6 +119,9 @@ export default function Home() {
   const handleSceneTransition = (data: any) => {
     switch (currentScene) {
       case 'introCutScene':
+        setCurrentScene('playScreen');
+        break;
+      case 'playScreen':
         setCurrentScene('remiIntro');
         break;
       case 'remiIntro':
@@ -281,6 +285,8 @@ export default function Home() {
         return <Ratilda onDialogueData={handleDialogueData} />;
       case 'introCutScene':
         return <IntroCutScene onDialogueData={handleDialogueData} />;
+      case 'playScreen':
+        return <PlayScreen onDialogueData={handleDialogueData} />;
       default:
         return <div className="text-white text-center">Unknown scene: {currentScene}</div>;
     }
