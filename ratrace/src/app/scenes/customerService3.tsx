@@ -18,7 +18,7 @@ interface RemiIntroProps {
     onDialogueData?: (data: any) => void;
 }
 
-const customerService3 = ({ onDialogueData }: RemiIntroProps) => {
+const CustomerService3 = ({ onDialogueData }: RemiIntroProps) => {
     const [currentDialogue, setCurrentDialogue] = useState("Hello!");
     const [showOptions, setShowOptions] = useState(true);
     const [dialogueStage, setDialogueStage] = useState("initial");
@@ -40,7 +40,7 @@ const customerService3 = ({ onDialogueData }: RemiIntroProps) => {
             {
                 id: "ew",
                 text: "Hello, what do you want?",
-                response: "Uhm, I was recently in a minor accident and I need help filing a claim.",
+                response: "Hi...uhm, my name is Riora. I was recently in a minor accident and I need help filing a claim.",
                 nextStage: "next"
             },
         ],
@@ -59,8 +59,8 @@ const customerService3 = ({ onDialogueData }: RemiIntroProps) => {
             },
             {
                 id: "ew",
-                text: "Oof...where? What's your name btw?",
-                response: "Uhm...ok, my name is Riora it was at Rat Dr.",
+                text: "Oof...sucks",
+                response: "Uhm...ok...can you help me though?",
                 nextStage: "info"
             },
         ],
@@ -68,7 +68,7 @@ const customerService3 = ({ onDialogueData }: RemiIntroProps) => {
             {
                 id: "helpful",
                 text: "First, I’ll need the details of the accident: date, location, and a short description. Once I have that, we’ll submit your claim together",
-                response: "It was yesterday, the 4th of October at Rat Dr. I was rearended by a 2-door sports ball.",
+                response: "It was yesterday, the 4th of October at Rat Dr. I was rear ended by a 2-door sports ball.",
                 nextStage: "afterFilling"
             },
             {
@@ -79,7 +79,7 @@ const customerService3 = ({ onDialogueData }: RemiIntroProps) => {
             },
             {
                 id: "ew",
-                text: "Just tell me when and where, that’s all I need. ",
+                text: "Just tell me when and where, that’s all I need.",
                 response: "Uhm...ok, it was Rat Dr, 1 day ago.",
                 nextStage: "afterFilling"
             },
@@ -97,7 +97,6 @@ const customerService3 = ({ onDialogueData }: RemiIntroProps) => {
                 response: "Uh...ok thanks I guess.",
                 nextStage: "end"
             }
-            
         ],
         proceed: [
             {
@@ -105,8 +104,7 @@ const customerService3 = ({ onDialogueData }: RemiIntroProps) => {
                 text: "Okay, perfect. Thank you and have a good one.",
                 response: "Thank you, bye!",
                 nextStage: "end"
-            },
-            
+            },   
         ]
     };
 
@@ -139,7 +137,6 @@ const customerService3 = ({ onDialogueData }: RemiIntroProps) => {
                             salesPoints = -2;
                             socialPoints = -1;
                         }
-                        
                         onDialogueData({
                             type: 'completed',
                             stage: 'FirstRatKingMeeting',
@@ -185,4 +182,4 @@ const customerService3 = ({ onDialogueData }: RemiIntroProps) => {
     );
 };
 
-export default customerService3;
+export default CustomerService3;

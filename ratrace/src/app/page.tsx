@@ -34,10 +34,11 @@ import CustomerService1 from './scenes/customerService1';
 import CustomerService2 from './scenes/customerService2';
 import CustomerService3 from './scenes/customerService3';
 import ReturnToKing from './scenes/returnToKing';
+import IntroCutScene from './scenes/introCutScene';
 
 export default function Home() {
   const [day, setDay] = useState(1);
-  const [currentScene, setCurrentScene] = useState('ratKingPromotion');
+  const [currentScene, setCurrentScene] = useState('introCutScene');
   const [playerData, setPlayerData] = useState({
     karma: 0,
     social: 0,
@@ -116,6 +117,9 @@ export default function Home() {
 
   const handleSceneTransition = (data: any) => {
     switch (currentScene) {
+      case 'introCutScene':
+        setCurrentScene('remiIntro');
+        break;
       case 'remiIntro':
         setCurrentScene('walkToDesk');
         break;
@@ -275,6 +279,8 @@ export default function Home() {
         return <RakeWelcomesYou onDialogueData={handleDialogueData} />;
       case 'ratildaScene':
         return <Ratilda onDialogueData={handleDialogueData} />;
+      case 'introCutScene':
+        return <IntroCutScene onDialogueData={handleDialogueData} />;
       default:
         return <div className="text-white text-center">Unknown scene: {currentScene}</div>;
     }
