@@ -11,6 +11,7 @@ import Ratcita from './scenes/ratcita';
 import KingExplainTutorial from './scenes/kingExplainTutorial';
 import ShadowRatcita from './scenes/shadowRatcita';
 import TalkAfterShadowing from './scenes/talkAfterShadowing';
+import RakeFromSnoutFarm from './scenes/rakeFromSnoutFarm';
 
 export default function Home() {
   const [day, setDay] = useState(1);
@@ -43,7 +44,7 @@ export default function Home() {
         setCurrentScene('remiIntro');
         break;
       case 'remiIntro':
-        setCurrentScene('ratcita');
+        setCurrentScene('walkToDesk');
         break;
       case 'walkToDesk':
         setCurrentScene('fetchCoffee');
@@ -64,6 +65,9 @@ export default function Home() {
         setCurrentScene('talkAfterShadowing');
         break;
       case 'talkAfterShadowing':
+        setCurrentScene('rakeFromSnoutFarm');
+        break;
+      case 'rakeFromSnoutFarm':
         setCurrentScene('remiIntro');
       default:
         console.log('Unknown scene transition from:', currentScene);
@@ -88,6 +92,8 @@ export default function Home() {
         return <ShadowRatcita onDialogueData={handleDialogueData} />
       case 'talkAfterShadowing':
         return <TalkAfterShadowing onDialogueData={handleDialogueData} />
+      case 'rakeFromSnoutFarm':
+        return <RakeFromSnoutFarm onDialogueData={handleDialogueData} />
       case 'declarationsQuiz':
         return <DeclarationsQuiz onDialogueData={handleDialogueData} />;
       default:
